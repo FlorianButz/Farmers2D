@@ -86,6 +86,9 @@ public class Translation {
 		germanTranslation.put("mainmenu.quit", "Verlassen");
 		englishTranslation.put("mainmenu.quit", "Quit");
 		
+		germanTranslation.put("mainmenu.play", "Spielen");
+		englishTranslation.put("mainmenu.play", "Play");
+		
 
 		germanTranslation.put("pausemenu.paused", "Pausiert");
 		englishTranslation.put("pausemenu.paused", "Paused");

@@ -99,7 +99,8 @@ public class MainMenu extends BaseScene {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
-				SceneManager.loadScene(new DefaultScene());
+//				SceneManager.loadScene(new DefaultScene());
+				SceneManager.loadScene(new TestScene());
 			}
 		});
 		play.alignment = GUIAlignment.Center;
