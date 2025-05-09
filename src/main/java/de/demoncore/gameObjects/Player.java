@@ -65,7 +65,7 @@ public class Player extends RigidBody{
 	@Override
 	public void update() {
 		super.update();
-	
+		
 		addForce(KeyHandler.playerInput1.normalized().multiply(playerAcceleration ));
 	}
 	

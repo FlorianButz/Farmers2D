@@ -45,6 +45,6 @@ public class Time {
 			currentYear++;
 		}
 		
-		Logger.logMessage(currentHour + ":" + currentMinute + ", " + currentDay + ", " + currentWeek + ", " + currentMonth + ", " + currentYear);
+//		Logger.logMessage(currentHour + ":" + currentMinute + ", " + currentDay + ", " + currentWeek + ", " + currentMonth + ", " + currentYear);
 	}
 }
