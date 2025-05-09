@@ -2,9 +2,12 @@ package de.demoncore.scenes;
 
 import java.awt.Color;
 
+import de.demoncore.actions.GameActionListener;
 import de.demoncore.game.GameObject;
 import de.demoncore.game.SceneManager;
 import de.demoncore.game.Translation;
+import de.demoncore.gameObjects.InteractableEvent;
+import de.demoncore.gameObjects.InteractableObject;
 import de.demoncore.gameObjects.ParticleSystem;
 import de.demoncore.gameObjects.PauseMenu;
 import de.demoncore.gameObjects.Player;
@@ -13,6 +16,7 @@ import de.demoncore.gui.GUIButton;
 import de.demoncore.gui.GUIButtonClickEvent;
 import de.demoncore.gui.dialog.Dialog;
 import de.demoncore.utils.GameMath;
+import de.demoncore.utils.Logger;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
 
@@ -65,6 +69,26 @@ public class TestScene extends BaseScene{
 		p.initialParticleSpeedMin = new Vector3(-25, -25);
 		// p.Init(); start
 		addObject(p);
+		
+		InteractableObject g = new InteractableObject(100, 100, 150, 150);
+		g.color = new Color(0, 0, 0, 0);
+		g.textColor = Color.white;
+		g.event = new InteractableEvent() {
+		@Override
+		public void onInteract() {
+			super.onInteract();
+				
+			
+			}
+		};
+		addObject(g);
+		
+		GameObject gO = new GameObject(100, 100, 50, 50);
+		gO.color = Color.gray;
+		addObject(gO);
+		
+		
+		
 	}
 	
 	@Override

@@ -46,9 +46,7 @@ public class SettingsMenu extends GUIMenu {
 	GUIToggle toggleSimpleDebugMode;
 	
 	GUIText languageText;
-	GUIButton toggleLanguage;
-	
-	private boolean manualToggledSDM = false;	//SDM = Simple Debug Mode
+	GUIButton toggleLanguage;	
 	
 	public SettingsMenu() {
 		backgroundColor = new Color(0, 0, 0, 0.975f);
@@ -230,7 +228,7 @@ public class SettingsMenu extends GUIMenu {
 				Settings.setDebugMode(!Settings.getDebugMode());
 				
 				if(!Settings.getDebugMode()) {
-					if(!manualToggledSDM) {
+					if(!Settings.getManualSDM()) {
 						Settings.setSimpleDebugMode(false);
 						toggleSimpleDebugMode.SetIsOn(Settings.getSimpleDebugMode());						
 					}
@@ -239,7 +237,7 @@ public class SettingsMenu extends GUIMenu {
 				
 				if(!Settings.getSimpleDebugMode()) {
 					Settings.setSimpleDebugMode(true);
-					manualToggledSDM = false;
+					Settings.setManualSDM(false);
 				}
 				toggleSimpleDebugMode.SetIsOn(Settings.getSimpleDebugMode());
 			}
@@ -260,7 +258,7 @@ public class SettingsMenu extends GUIMenu {
 				
 				Settings.setSimpleDebugMode(!Settings.getSimpleDebugMode());
 				if(Settings.getSimpleDebugMode()) {
-					manualToggledSDM = true;
+					Settings.setManualSDM(true);
 				}
 			}
 		});

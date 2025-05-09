@@ -102,7 +102,7 @@ public class Translation {
 		germanTranslation.put("pausemenu.returntogame", "Zurueck zum Spiel");
 		englishTranslation.put("pausemenu.returntogame", "Return to Game");
 		
-		germanTranslation.put("pausemenu.backtomainmenu", "Zurueck zum Speisekarte");
+		germanTranslation.put("pausemenu.backtomainmenu", "Zurueck zur Speisekarte");
 		englishTranslation.put("pausemenu.backtomainmenu", "Back to Main Menu");
 	
 		

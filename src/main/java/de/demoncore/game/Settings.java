@@ -2,6 +2,7 @@ package de.demoncore.game;
 
 import de.demoncore.audio.AudioMaster;
 import de.demoncore.gui.Gui;
+import de.demoncore.scenes.MainMenu;
 import de.demoncore.utils.GameMath;
 import de.demoncore.utils.Logger;
 
@@ -23,6 +24,7 @@ public class Settings {
 		setFullscreen(deserializedSettings.fullscreen);
 		setDebugMode(deserializedSettings.debugMode);
 		setSimpleDebugMode(deserializedSettings.simpleDebugMode);
+		setManualSDM(deserializedSettings.manuelSDM);	//SDM = Simple Debug Mode
 		setLang(deserializedSettings.language);
 		setParticleEffects(deserializedSettings.particleEffects);
 		setSlowPedals(deserializedSettings.slowPedal);
@@ -42,6 +44,7 @@ public class Settings {
 		classToSave.fullscreen = fullscreen;
 		classToSave.debugMode = debugMode;
 		classToSave.simpleDebugMode = simpleDebugMode;
+		classToSave.manuelSDM = manuelSDM;
 		classToSave.language = language;
 		classToSave.cameraShake = cameraShake;
 		classToSave.particleEffects = particleEffects;
@@ -65,6 +68,7 @@ public class Settings {
 
 	private static boolean debugMode;
 	private static boolean simpleDebugMode;
+	private static boolean manuelSDM;
 	private static boolean particleEffects;
 	private static boolean cameraShake;
 	private static boolean slowPedals;
@@ -141,6 +145,14 @@ public class Settings {
 	
 	public static void setSimpleDebugMode(boolean isOn) {
 		simpleDebugMode = isOn;
+	}
+	
+	public static boolean getManualSDM() {
+		return manuelSDM;
+	}
+	
+	public static void setManualSDM(boolean isOn) {
+		manuelSDM = isOn;
 	}
 
 	public static boolean isParticleEffects() {

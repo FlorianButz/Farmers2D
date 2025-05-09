@@ -2,10 +2,9 @@ package de.demoncore.scenes;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics2D;
 
-import de.demoncore.audio.MusicManager;
 import de.demoncore.game.SceneManager;
+import de.demoncore.game.Settings;
 import de.demoncore.game.Translation;
 import de.demoncore.game.animator.AnimatorOnCompleteEvent;
 import de.demoncore.game.animator.AnimatorUpdateEvent;
@@ -16,10 +15,8 @@ import de.demoncore.gameObjects.SettingsMenu;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIButton;
 import de.demoncore.gui.GUIButtonClickEvent;
-import de.demoncore.gui.GUIImageButton;
 import de.demoncore.gui.GUIMenu;
 import de.demoncore.gui.GUIText;
-import de.demoncore.gui.MessagePopup;
 import de.demoncore.main.Main;
 import de.demoncore.utils.Logger;
 import de.demoncore.utils.Resources;
@@ -28,6 +25,13 @@ import de.farmers2d.scenes.FarmersBaseScene;
 
 public class MainMenu extends BaseScene {
 	
+	private static MainMenu instance;
+	public static boolean testSceneEnabled;
+	
+	public MainMenu() {
+		instance = this;
+	}
+
 	@Override
 	public void initializeScene() {
 		super.initializeScene();
@@ -106,7 +110,18 @@ public class MainMenu extends BaseScene {
 			}
 		});
 		play.alignment = GUIAlignment.Center;
-		addObject(play);	
+		addObject(play);
+		
+		GUIButton testScene = new GUIButton(0, -100, 800, 75, Translation.get("TestScene"), Resources.uiFont.deriveFont(35F),  new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				SceneManager.loadScene(new TestScene());
+			}
+		});
+		testScene.alignment = GUIAlignment.Center;
+		if(Settings.getSimpleDebugMode())
+			addObject(testScene);
 		
 		GUIButton settings = new GUIButton(0, 200, 800, 75, Translation.get("mainmenu.settings"), Resources.uiFont.deriveFont(35F), new GUIButtonClickEvent() {
 			@Override
@@ -119,5 +134,9 @@ public class MainMenu extends BaseScene {
 		});
 		settings.alignment = GUIAlignment.Center;
 		addObject(settings);
+	}
+
+	public static MainMenu getInstance() {
+		return instance;
 	}
 }
