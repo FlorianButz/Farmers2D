@@ -21,6 +21,7 @@ import de.demoncore.gui.GUIMenu;
 import de.demoncore.gui.GUIText;
 import de.demoncore.gui.MessagePopup;
 import de.demoncore.main.Main;
+import de.demoncore.utils.Logger;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
 
@@ -30,7 +31,7 @@ public class MainMenu extends BaseScene {
 	public void initializeScene() {
 		super.initializeScene();
 		
-		System.out.println("MainMenu l.33 Music Manager Disabled");
+		Logger.logWarning("MainMenu l.33 Music Manager Disabled", this);
 		// MusicManager.ForcePlayMusic(MusicManager.playing1Audio[0], true);
 		
 		ParticleSystem bgSys = new ParticleSystem(0, 0);	// Neues partikelsystem wird definiert

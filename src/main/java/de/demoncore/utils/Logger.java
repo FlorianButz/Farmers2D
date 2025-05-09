@@ -16,17 +16,17 @@ public class Logger {
 	
 	public static void logMessage(String message, Object caller){
 		System.out.println(ANSI_GREEN + "[Msg\t][" + new SimpleDateFormat("HH:mm:ss").format(new java.util.Date())
-				+ "][From: " + caller.getClass().getSimpleName() + "] " + ANSI_WHITE + message + ANSI_RESET);
+				+ "] [From: " + caller.getClass().getSimpleName() + "] " + ANSI_WHITE + message + ANSI_RESET);
 	}
 	
 	public static void logInfo(String message, Object caller){
 		System.out.println(ANSI_YELLOW + "[Inf\t]" + ANSI_GREEN + "[" + new SimpleDateFormat("HH:mm:ss").format(new java.util.Date())
-				+ "][From: " + caller.getClass().getSimpleName() + "] " + message + ANSI_RESET);
+				+ "] [From: " + caller.getClass().getSimpleName() + "] " + message + ANSI_RESET);
 	}
 
 	public static void logWarning(String message, Object caller){
 		System.out.println(ANSI_YELLOW + "[War\t][" + new SimpleDateFormat("HH:mm:ss").format(new java.util.Date())
-				+ "][From: " + caller.getClass().getSimpleName() + "] " + message + ANSI_RESET);
+				+ "] [From: " + caller.getClass().getSimpleName() + "] " + message + ANSI_RESET);
 	}
 	
 	public static void logMessage(String message){
@@ -46,6 +46,6 @@ public class Logger {
 	
 	public static void logError(String message, Object caller){
 		System.out.println(ANSI_RED + "[Err\t][" + new SimpleDateFormat("HH:mm:ss").format(new java.util.Date())
-				+ "][From: " + caller.getClass().getSimpleName() + "] " + message + ANSI_RESET);
+				+ "] [From: " + caller.getClass().getSimpleName() + "] " + message + ANSI_RESET);
 	}
 }
