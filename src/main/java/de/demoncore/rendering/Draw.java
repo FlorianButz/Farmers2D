@@ -132,7 +132,7 @@ public class Draw extends JPanel {
 		
 		// Anti aliasing
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);	// Anti aliasing - sehr wichtig
-		// g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);	// Schalte akkurate text anzeige an
+		// ag2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);	// Schalte akkurate text anzeige an
 		// g2d.setRenderingHint( RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB ); // Text Anti aliasing - sehr wichtig
 		
 		// Neuen transform erstellen

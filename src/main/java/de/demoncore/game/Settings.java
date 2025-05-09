@@ -48,7 +48,7 @@ public class Settings {
 
 		// Speicherdatei erstellen
 		
-		SaveManager.SaveToFile("settings.g4pong", classToSave);
+		SaveManager.SaveToFile("settings", classToSave);
 	}
 
 	// EINSTELLUNGEN
