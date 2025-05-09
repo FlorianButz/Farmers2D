@@ -3,10 +3,12 @@ package de.demoncore.scenes;
 import de.demoncore.game.GameObject;
 import de.demoncore.game.SceneManager;
 import de.demoncore.game.Translation;
+import de.demoncore.gameObjects.PauseMenu;
 import de.demoncore.gameObjects.Player;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIButton;
 import de.demoncore.gui.GUIButtonClickEvent;
+import de.demoncore.gui.dialog.Dialog;
 import de.demoncore.utils.GameMath;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
@@ -47,7 +49,8 @@ public class TestScene extends BaseScene{
 			addObject(gameObject);
 		}
 		
-		
+		PauseMenu m = new PauseMenu();
+		addObject(m);
 	}
 	
 	@Override

@@ -38,7 +38,6 @@ public class RigidBody extends GameObject {
             // Then handle Y movement
             moveWithCollision(new Vector3(0, velocity.y, 0));
             
-            // Apply friction
             velocity = velocity.multiply(friction);
         }
     }

@@ -309,7 +309,8 @@ public class Resources {
 		Logger.logInfo("Lade Ressourcen: Lade Dialoge...");
 		
 		dialogs = new ArrayList<DialogLine>();
-
+		
+		testLine = new DialogLine("Test Dialog Name", Translation.get("sign.start.0"), new DialogLine("Test Dialog Name 2", Translation.get("sign.start.1"), null));
 		dialogs.add(testLine);
 
 		startDialogSign = new DialogLine("Sign", Translation.get("sign.start.0"), new DialogLine("Sign", Translation.get("sign.start.1"), null));

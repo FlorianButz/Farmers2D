@@ -2,6 +2,7 @@ package de.demoncore.rendering;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.MouseInfo;
@@ -43,9 +44,41 @@ public class Draw extends JPanel {
 	public static float screenScale = 1f;
 	public static float screenSize = 1f;
 	
+	public int targetFPS = 60;
+	
 	public Draw() {
 		lastTime = System.currentTimeMillis();
+		
+		setupRenderLoop();
 	}
+	
+	void setupRenderLoop() {
+		// Launch the game loop on a separate thread to keep UI responsive
+        Thread gameThread = new Thread(() -> {
+            // Choose one of the game loop implementations
+            //runVariableStepGameLoop();
+            runFixedStepGameLoop();
+            //runSemiFixedStepGameLoop();
+        }, "GameLoop");
+        
+        gameThread.setDaemon(true); // Allow JVM to exit if this thread is still running
+        gameThread.start();
+	}
+	
+	private void runFixedStepGameLoop() {
+		long frametime = (long)((1f / (float)targetFPS) * 1000);
+		
+		while(true) {
+			EventQueue.invokeLater(() -> {
+	            repaint();
+	        });
+			try {
+				Thread.sleep(frametime);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+    }
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
