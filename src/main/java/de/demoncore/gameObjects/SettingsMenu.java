@@ -41,9 +41,14 @@ public class SettingsMenu extends GUIMenu {
 
 	GUIText debugModeText;
 	GUIToggle toggleDebugMode;
+
+	GUIText simpleDebugModeText;
+	GUIToggle toggleSimpleDebugMode;
 	
 	GUIText languageText;
 	GUIButton toggleLanguage;
+	
+	private boolean manualToggledSDM = false;	//SDM = Simple Debug Mode
 	
 	public SettingsMenu() {
 		backgroundColor = new Color(0, 0, 0, 0.975f);
@@ -223,13 +228,47 @@ public class SettingsMenu extends GUIMenu {
 				super.ButtonClick();
 
 				Settings.setDebugMode(!Settings.getDebugMode());
+				
+				if(!Settings.getDebugMode()) {
+					if(!manualToggledSDM) {
+						Settings.setSimpleDebugMode(false);
+						toggleSimpleDebugMode.SetIsOn(Settings.getSimpleDebugMode());						
+					}
+					return;
+				}
+				
+				if(!Settings.getSimpleDebugMode()) {
+					Settings.setSimpleDebugMode(true);
+					manualToggledSDM = false;
+				}
+				toggleSimpleDebugMode.SetIsOn(Settings.getSimpleDebugMode());
 			}
 		});
 		toggleDebugMode.SetIsOn(Settings.getDebugMode());
 		toggleDebugMode.alignment = GUIAlignment.Center;
 		content.add(toggleDebugMode);
 		
-		languageText = new GUIText(-450, buttonHeight * 1 + spacing * 5 + startPos, Translation.get("settings.lang"), Resources.uiFont.deriveFont(settingsTextSize), Color.white);
+		simpleDebugModeText = new GUIText(-450, buttonHeight * 1 + spacing * 5 + startPos, Translation.get("settings.debug.simple"), Resources.uiFont.deriveFont(settingsTextSize), Color.white);
+		simpleDebugModeText.alignment = GUIAlignment.Center;
+		simpleDebugModeText.SetTextAlignment(TextAlignment.Left);
+		content.add(simpleDebugModeText);
+		
+		toggleSimpleDebugMode = new GUIToggle(250, buttonHeight * 1 + spacing * 5 + startPos, 125, buttonHeight, new GUIButtonClickEvent() {
+			@Override
+			public void ButtonClick() {
+				super.ButtonClick();
+				
+				Settings.setSimpleDebugMode(!Settings.getSimpleDebugMode());
+				if(Settings.getSimpleDebugMode()) {
+					manualToggledSDM = true;
+				}
+			}
+		});
+		toggleSimpleDebugMode.SetIsOn(Settings.getSimpleDebugMode());
+		toggleSimpleDebugMode.alignment = GUIAlignment.Center;
+		content.add(toggleSimpleDebugMode);
+		
+		languageText = new GUIText(-450, buttonHeight * 2 + spacing * 6 + startPos, Translation.get("settings.lang"), Resources.uiFont.deriveFont(settingsTextSize), Color.white);
 		languageText.alignment = GUIAlignment.Center;
 		languageText.SetTextAlignment(TextAlignment.Left);
 		content.add(languageText);
@@ -237,7 +276,7 @@ public class SettingsMenu extends GUIMenu {
 		String languageButtonText = Settings.getLang().toString(); // Ersetzen mit enum von Settings
 		//if(Settings.GetDebugMode())
 		//	toggleDebugModeText = "An";
-		toggleLanguage = new GUIButton(325, buttonHeight * 1 + spacing * 5 + startPos, 275, buttonHeight, Translation.literal(languageButtonText), Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
+		toggleLanguage = new GUIButton(325, buttonHeight * 2 + spacing * 6 + startPos, 275, buttonHeight, Translation.literal(languageButtonText), Resources.uiFont.deriveFont(settingsTextSize), new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -248,12 +287,12 @@ public class SettingsMenu extends GUIMenu {
 		toggleLanguage.alignment = GUIAlignment.Center;
 		content.add(toggleLanguage);
 		
-		GUIText cameraShakeText = new GUIText(-450, buttonHeight * 2 + spacing * 6 + startPos, Translation.get("settings.camerashake"), Resources.uiFont.deriveFont(settingsTextSize), Color.white);
+		GUIText cameraShakeText = new GUIText(-450, buttonHeight * 3 + spacing * 7 + startPos, Translation.get("settings.camerashake"), Resources.uiFont.deriveFont(settingsTextSize), Color.white);
 		cameraShakeText.alignment = GUIAlignment.Center;
 		cameraShakeText.SetTextAlignment(TextAlignment.Left);
 		content.add(cameraShakeText);
 		
-		GUIToggle toggleCameraShake = new GUIToggle(250, buttonHeight * 2 + spacing * 6 + startPos, 125, buttonHeight, new GUIButtonClickEvent() {
+		GUIToggle toggleCameraShake = new GUIToggle(250, buttonHeight * 3 + spacing * 7 + startPos, 125, buttonHeight, new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -265,12 +304,12 @@ public class SettingsMenu extends GUIMenu {
 		toggleCameraShake.alignment = GUIAlignment.Center;
 		content.add(toggleCameraShake);
 		
-		GUIText particleEffectsText = new GUIText(-450, buttonHeight * 3 + spacing * 7 + startPos, Translation.get("settings.particles"), Resources.uiFont.deriveFont(settingsTextSize), Color.white);
+		GUIText particleEffectsText = new GUIText(-450, buttonHeight * 4 + spacing * 8 + startPos, Translation.get("settings.particles"), Resources.uiFont.deriveFont(settingsTextSize), Color.white);
 		particleEffectsText.alignment = GUIAlignment.Center;
 		particleEffectsText.SetTextAlignment(TextAlignment.Left);
 		content.add(particleEffectsText);
 		
-		GUIToggle toggleParticleEffectsText = new GUIToggle(250, buttonHeight * 3 + spacing * 7 + startPos, 125, buttonHeight, new GUIButtonClickEvent() {
+		GUIToggle toggleParticleEffectsText = new GUIToggle(250, buttonHeight * 4 + spacing * 8 + startPos, 125, buttonHeight, new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -282,12 +321,12 @@ public class SettingsMenu extends GUIMenu {
 		toggleParticleEffectsText.alignment = GUIAlignment.Center;
 		content.add(toggleParticleEffectsText);
 		
-		GUIText smallGuiText = new GUIText(-450, buttonHeight * 4 + spacing * 8 + startPos, Translation.get("settings.smallgui"), Resources.uiFont.deriveFont(settingsTextSize), Color.white);
+		GUIText smallGuiText = new GUIText(-450, buttonHeight * 5 + spacing * 9 + startPos, Translation.get("settings.smallgui"), Resources.uiFont.deriveFont(settingsTextSize), Color.white);
 		smallGuiText.alignment = GUIAlignment.Center;
 		smallGuiText.SetTextAlignment(TextAlignment.Left);
 		content.add(smallGuiText);
 		
-		GUIToggle smallGuiToggle = new GUIToggle(250, buttonHeight * 4 + spacing * 8 + startPos, 125, buttonHeight, new GUIButtonClickEvent() {
+		GUIToggle smallGuiToggle = new GUIToggle(250, buttonHeight * 5 + spacing * 9 + startPos, 125, buttonHeight, new GUIButtonClickEvent() {
 			@Override
 			public void ButtonClick() {
 				super.ButtonClick();
@@ -300,6 +339,7 @@ public class SettingsMenu extends GUIMenu {
 		content.add(smallGuiToggle);
 		
 		GUITheme.LoadTextTheme(debugModeText, Theme.TextSecondary);
+		GUITheme.LoadTextTheme(simpleDebugModeText, Theme.TextSecondary);
 		GUITheme.LoadTextTheme(fullscreenText, Theme.TextSecondary);
 		GUITheme.LoadTextTheme(volumeDisplay, Theme.TextSecondary);
 		GUITheme.LoadTextTheme(volumeText, Theme.TextSecondary);
@@ -315,6 +355,7 @@ public class SettingsMenu extends GUIMenu {
 		GUITheme.LoadButtonTheme(musicVolumeDown, Theme.ButtonSecondary);
 		GUITheme.LoadButtonTheme(musicVolumeUp, Theme.ButtonSecondary);
 		GUITheme.LoadButtonTheme(toggleDebugMode, Theme.ButtonSecondary);
+		GUITheme.LoadButtonTheme(toggleSimpleDebugMode, Theme.ButtonSecondary);
 		GUITheme.LoadButtonTheme(toggleFullscreen, Theme.ButtonSecondary);
 		GUITheme.LoadButtonTheme(toggleLanguage, Theme.ButtonSecondary);
 		GUITheme.LoadButtonTheme(toggleCameraShake, Theme.ButtonSecondary);

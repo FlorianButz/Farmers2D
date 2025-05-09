@@ -40,6 +40,9 @@ public class Translation {
 		germanTranslation.put("settings.debug", "Debug Modus:");
 		englishTranslation.put("settings.debug", "Debug Mode:");
 		
+		germanTranslation.put("settings.debug.simple", "Einfacher Debug Modus:");
+		englishTranslation.put("settings.debug.simple", "Simple Debug Mode:");
+		
 		germanTranslation.put("settings.sfxVol", "SFX Lautstaerke:");
 		englishTranslation.put("settings.sfxVol", "SFX Volume:");
 

@@ -15,13 +15,14 @@ public class Settings {
 
 		Logger.logInfo("Einstellungen werden geladen...");
 		
-		SettingsSave deserializedSettings = SaveManager.LoadSave("settings.g4pong");
+		SettingsSave deserializedSettings = SaveManager.LoadSave("settings");
 		if(deserializedSettings == null) deserializedSettings = new SettingsSave();
 		
 		setMusicVolume(deserializedSettings.musicVolume);
 		setVolume(deserializedSettings.masterVolume);
 		setFullscreen(deserializedSettings.fullscreen);
 		setDebugMode(deserializedSettings.debugMode);
+		setSimpleDebugMode(deserializedSettings.simpleDebugMode);
 		setLang(deserializedSettings.language);
 		setParticleEffects(deserializedSettings.particleEffects);
 		setSlowPedals(deserializedSettings.slowPedal);
@@ -40,6 +41,7 @@ public class Settings {
 		classToSave.musicVolume = (int) musicVolume;
 		classToSave.fullscreen = fullscreen;
 		classToSave.debugMode = debugMode;
+		classToSave.simpleDebugMode = simpleDebugMode;
 		classToSave.language = language;
 		classToSave.cameraShake = cameraShake;
 		classToSave.particleEffects = particleEffects;
@@ -62,6 +64,7 @@ public class Settings {
 	private static float uiScaleMultiplier = 0.85f;
 
 	private static boolean debugMode;
+	private static boolean simpleDebugMode;
 	private static boolean particleEffects;
 	private static boolean cameraShake;
 	private static boolean slowPedals;
@@ -130,6 +133,14 @@ public class Settings {
 
 	public static void setDebugMode(boolean isOn) {
 		debugMode = isOn;
+	}
+	
+	public static boolean getSimpleDebugMode() {
+		return simpleDebugMode;
+	}
+	
+	public static void setSimpleDebugMode(boolean isOn) {
+		simpleDebugMode = isOn;
 	}
 
 	public static boolean isParticleEffects() {
