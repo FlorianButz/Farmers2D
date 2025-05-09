@@ -49,19 +49,22 @@ public class Draw extends JPanel {
 	public Draw() {
 		lastTime = System.currentTimeMillis();
 		
+		enableOpenGLAcceleration();
 		setupRenderLoop();
 	}
 	
+    public static void enableOpenGLAcceleration() {
+        System.setProperty("sun.java2d.opengl", "True");
+        System.setProperty("sun.java2d.accthreshold", "0");
+        System.setProperty("sun.java2d.noddraw", "true");
+    }
+	
 	void setupRenderLoop() {
-		// Launch the game loop on a separate thread to keep UI responsive
         Thread gameThread = new Thread(() -> {
-            // Choose one of the game loop implementations
-            //runVariableStepGameLoop();
             runFixedStepGameLoop();
-            //runSemiFixedStepGameLoop();
         }, "GameLoop");
         
-        gameThread.setDaemon(true); // Allow JVM to exit if this thread is still running
+        gameThread.setDaemon(true);
         gameThread.start();
 	}
 	
@@ -129,9 +132,8 @@ public class Draw extends JPanel {
 		
 		// Anti aliasing
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);	// Anti aliasing - sehr wichtig
-		g2d.setRenderingHint(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_ENABLE);	// Dithering / Ist nicht so wichtig
-		g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);	// Schalte akkurate text anzeige an
-		g2d.setRenderingHint( RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB ); // Text Anti aliasing - sehr wichtig
+		// g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);	// Schalte akkurate text anzeige an
+		// g2d.setRenderingHint( RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB ); // Text Anti aliasing - sehr wichtig
 		
 		// Neuen transform erstellen
 		AffineTransform transformation = new AffineTransform();

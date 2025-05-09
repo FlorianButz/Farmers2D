@@ -1,8 +1,11 @@
 package de.demoncore.scenes;
 
+import java.awt.Color;
+
 import de.demoncore.game.GameObject;
 import de.demoncore.game.SceneManager;
 import de.demoncore.game.Translation;
+import de.demoncore.gameObjects.ParticleSystem;
 import de.demoncore.gameObjects.PauseMenu;
 import de.demoncore.gameObjects.Player;
 import de.demoncore.gui.GUIAlignment;
@@ -51,6 +54,17 @@ public class TestScene extends BaseScene{
 		
 		PauseMenu m = new PauseMenu();
 		addObject(m);
+		
+		ParticleSystem p = new ParticleSystem(0, 0);
+		p.emitLoop = true;
+		p.emitChunk = 10;
+		p.initialParticleSize = 15;
+		p.particleColorFirst = Color.white;
+		p.particleGravity = 0.075f;
+		p.initialParticleSpeedMax = new Vector3(25, 25);
+		p.initialParticleSpeedMin = new Vector3(-25, -25);
+		// p.Init(); start
+		addObject(p);
 	}
 	
 	@Override
