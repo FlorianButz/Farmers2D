@@ -200,7 +200,7 @@ public class Draw extends JPanel {
 			g2dGobj.dispose();
 		}
 		
-		if(Settings.getDebugMode()) {
+		if(Settings.getSimpleDebugMode()) {
 			Rectangle viewport = SceneManager.getActiveScene().getCameraViewport();
 			g2d.setStroke(new BasicStroke(5));
 			g2d.setColor(new Color(1, 1, 0, 0.75f));
@@ -364,7 +364,7 @@ public class Draw extends JPanel {
 
 		
 		// Debug modus
-		if(Settings.getDebugMode() && Resources.uiFont != null) {			
+		if(Settings.getSimpleDebugMode() && Resources.uiFont != null) {			
 			g2d.setFont(Resources.uiFont.deriveFont(15F));
 			g2d.setColor(new Color(1, 1, 1, 0.25f));
 			g2d.drawString("Version -> " + Main.version, 15, 25);

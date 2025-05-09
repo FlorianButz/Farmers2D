@@ -10,6 +10,7 @@ public class SettingsSave implements Serializable {
 	public boolean fullscreen = false;
 
 	public boolean debugMode = false;
+	public boolean simpleDebugMode = false;
 	public boolean slowPedal = false;
 	public boolean particleEffects = true;
 	public boolean cameraShake = true;
