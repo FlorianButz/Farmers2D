@@ -35,7 +35,7 @@ public class ParticleSystem extends GameObject {
 	public float initialParticleSizeRandom = 2;
 	public float endParticleSize = 0;
 
-	public float particleGravity = 1f ;
+	public float particleGravity = 1f;
 
 	public float particleDamping = 0.99f; // Nur werte zwischen 0 und 1!
 
