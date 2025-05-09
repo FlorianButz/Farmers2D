@@ -24,6 +24,7 @@ import de.demoncore.main.Main;
 import de.demoncore.utils.Logger;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
+import de.farmers2d.scenes.FarmersBaseScene;
 
 public class MainMenu extends BaseScene {
 	
@@ -101,7 +102,7 @@ public class MainMenu extends BaseScene {
 			public void ButtonClick() {
 				super.ButtonClick();
 //				SceneManager.loadScene(new DefaultScene());
-				SceneManager.loadScene(new TestScene());
+				SceneManager.loadScene(new FarmersBaseScene());
 			}
 		});
 		play.alignment = GUIAlignment.Center;
