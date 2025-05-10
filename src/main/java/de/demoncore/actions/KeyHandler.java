@@ -35,6 +35,7 @@ public class KeyHandler implements KeyListener, MouseListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		Vector3 temp = playerInput1.add(new Vector3(0, 0, 0));
 		if(pressedKeys.contains(e.getKeyCode())) return; // Sperrt die Tastatur wenn gespammt wird
 		pressedKeys.add(e.getKeyCode()); // Sperre
 		
@@ -72,6 +73,14 @@ public class KeyHandler implements KeyListener, MouseListener {
 		} else if (e.getKeyCode() == KeyEvent.VK_S) {
 			playerInput1 = playerInput1.add(new Vector3(0, 1, 0));
 		}
+		
+		if(Vector3.distance(temp, playerInput1) != 0) {
+			ArrayList<GameActionListener> l = new ArrayList<GameActionListener>(listeners);
+			for(GameActionListener g : l) {
+				g.onPlayerMovement();
+			}
+		}
+		
 	}
 
 	@Override

@@ -9,4 +9,5 @@ public class GameActionListener {
 	public void onEscapePressed() {}
 	public void onInteractionKeyPressed() {}
 	public void onSpaceKeyPressed() {}
+	public void onPlayerMovement() {}
 }

@@ -27,7 +27,6 @@ public class Player extends RigidBody{
 			@Override
 			public void onSpaceKeyPressed() {
 				super.onSpaceKeyPressed();
-				Logger.logInfo("pressed Space");
 				
 			}
 			

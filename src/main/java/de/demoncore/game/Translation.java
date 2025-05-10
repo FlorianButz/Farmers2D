@@ -135,9 +135,33 @@ public class Translation {
 		
 		germanTranslation.put("pong.end_title_points", "Pong Taler zum Konto hinzugefuegt: ");
 		englishTranslation.put("pong.end_title_points", "Pong Taler gathered: ");
-
+		
 		germanTranslation.put("pong.back", "Zurueck zum Hauptmenue");
 		englishTranslation.put("pong.back", "Back to Main Menu");
+		
+		
+		germanTranslation.put("quest.description.action", "Führe folgende Aktion {x}x aus: {action}");
+		englishTranslation.put("quest.description.action", "Perform the following action {x} times: {action}");
+
+		germanTranslation.put("quest.description.location", "Begebe dich zu folgenden Koordinaten: {action}");
+		englishTranslation.put("quest.description.location", "Perform the following action {x} times: {action}");
+
+		
+		germanTranslation.put("quest.title.action", "Aktion ausfuehren");
+		englishTranslation.put("quest.title.action", "Perform action");
+		
+		germanTranslation.put("quest.title.location", "Aktion ausfuehren");
+		englishTranslation.put("quest.title.location", "Perform action");
+		
+		
+		germanTranslation.put("trackable.space", "Leertaste drücken");
+		englishTranslation.put("trackable.space", "pressing Spacebar");
+		
+		germanTranslation.put("trackable.location", "Standort erreichen");
+		englishTranslation.put("trackable.location", "reach Position");
+
+		
+		
 	}
 
 	public static TranslationComponent get(String translationID) {

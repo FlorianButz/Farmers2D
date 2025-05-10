@@ -11,6 +11,7 @@ import de.demoncore.gameObjects.InteractableObject;
 import de.demoncore.gameObjects.ParticleSystem;
 import de.demoncore.gameObjects.PauseMenu;
 import de.demoncore.gameObjects.Player;
+import de.demoncore.gameObjects.QuestBoard;
 import de.demoncore.gui.GUIAlignment;
 import de.demoncore.gui.GUIButton;
 import de.demoncore.gui.GUIButtonClickEvent;
@@ -19,6 +20,7 @@ import de.demoncore.utils.GameMath;
 import de.demoncore.utils.Logger;
 import de.demoncore.utils.Resources;
 import de.demoncore.utils.Vector3;
+import de.farmers2d.quests.QuestManager;
 
 public class TestScene extends BaseScene{
 	
@@ -30,20 +32,6 @@ public class TestScene extends BaseScene{
 	@Override
 	public void initializeScene() {
 		super.initializeScene();
-		
-		GUIButton returnButton = new GUIButton(-250, 75, 400, 50, Translation.get("pausemenu.backtomainmenu"), Resources.uiFont.deriveFont(25f), new GUIButtonClickEvent() {
-		@Override
-		public void ButtonClick() {
-			super.ButtonClick();
-			SceneManager.loadScene(new MainMenu());
-			
-		}
-		
-		});
-		
-		returnButton.alignment = GUIAlignment.TopRight;
-		
-		addObject(returnButton);
 		
 		cameraFollow = Player.getInstance();
 		
@@ -70,22 +58,17 @@ public class TestScene extends BaseScene{
 		// p.Init(); start
 		addObject(p);
 		
-		InteractableObject g = new InteractableObject(100, 100, 150, 150);
-		g.color = new Color(0, 0, 0, 0);
-		g.textColor = Color.white;
-		g.event = new InteractableEvent() {
-		@Override
-		public void onInteract() {
-			super.onInteract();
-				
-			
-			}
-		};
-		addObject(g);
+		QuestBoard qb = new QuestBoard(100, 100, 150, 150);
+		qb.color = new Color(0, 0, 0, 0);
+		qb.textColor = Color.white;
+		addObject(qb);
 		
 		GameObject gO = new GameObject(100, 100, 50, 50);
 		gO.color = Color.gray;
 		addObject(gO);
+		
+		QuestManager q = new QuestManager();
+		addObject(q);
 		
 		
 		

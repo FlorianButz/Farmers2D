@@ -91,7 +91,7 @@ public class Vector3 {
         return new Vector3(x / length, y / length, z / length);
     }
 	
-	public static float Distance(Vector3 a, Vector3 b) {
+	public static float distance(Vector3 a, Vector3 b) {
 		return (float) Math.sqrt(Math.pow(b.x - a.x, 2) + Math.pow(b.y - a.y, 2) + Math.pow(b.z - a.z, 2));
 	}
 }
