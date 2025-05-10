@@ -1,5 +1,10 @@
 package de.farmers2d.quests;
 
+import de.farmers2d.quests.core.QuestCondition;
+import de.farmers2d.quests.core.QuestReward;
+import de.farmers2d.quests.core.QuestTask;
+import de.farmers2d.quests.core.QuestType;
+
 public class Quest {
 	
 	public String description = "";

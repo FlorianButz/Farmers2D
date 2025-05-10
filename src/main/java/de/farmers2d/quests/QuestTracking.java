@@ -10,6 +10,10 @@ import de.demoncore.gameObjects.Player;
 import de.demoncore.utils.GameMath;
 import de.demoncore.utils.Logger;
 import de.demoncore.utils.Vector3;
+import de.farmers2d.quests.core.QuestCondition;
+import de.farmers2d.quests.core.QuestReward;
+import de.farmers2d.quests.core.QuestTask;
+import de.farmers2d.quests.core.QuestType;
 
 public class QuestTracking {
 	
@@ -35,7 +39,7 @@ public class QuestTracking {
 				}
 				
 			}
-		});
+		}, Integer.class);
 		spacePressed.reward = new QuestReward() {
 			@Override
 			public void onCompletion() {
@@ -56,7 +60,7 @@ public class QuestTracking {
 				}
 				
 			}
-		});
+		}, Vector3.class);
 		location.reward = new QuestReward() {
 			@Override
 			public void onCompletion() {
@@ -77,11 +81,14 @@ public class QuestTracking {
 
 	
 	
-	public QuestTask<?> getRandomQuestTask(QuestType type) {
-	    ArrayList<QuestTask<?>> filtered = new ArrayList<>();
+	public <T> QuestTask<T> getRandomQuestTask(QuestType type, Class<T> clazz) {
+	    ArrayList<QuestTask<T>> filtered = new ArrayList<>();
+
 	    for (QuestTask<?> task : taskList) {
-	        if (task.getType() == type) {
-	            filtered.add(task);
+	        if (task.getType() == type && clazz.isInstance(task.getValue())) {
+	            @SuppressWarnings("unchecked")
+	            QuestTask<T> typedTask = (QuestTask<T>) task;
+	            filtered.add(typedTask);
 	        }
 	    }
 
@@ -89,6 +96,7 @@ public class QuestTracking {
 
 	    return filtered.get(GameMath.RandomRange(0, filtered.size()));
 	}
+
 
 	
 	public void addSpacePresses(int value) {

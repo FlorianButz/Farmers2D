@@ -1,4 +1,4 @@
-package de.farmers2d.quests;
+package de.farmers2d.quests.core;
 
 public enum QuestType {
 	Action("action"),

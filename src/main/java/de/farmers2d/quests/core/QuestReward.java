@@ -1,4 +1,4 @@
-package de.farmers2d.quests;
+package de.farmers2d.quests.core;
 
 public abstract class QuestReward {
 	public String description = "";

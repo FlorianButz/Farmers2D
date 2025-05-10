@@ -145,13 +145,26 @@ public class Translation {
 
 		germanTranslation.put("quest.description.location", "Begebe dich zu folgenden Koordinaten: {action}");
 		englishTranslation.put("quest.description.location", "Perform the following action {x} times: {action}");
+		
+		germanTranslation.put("quest.description.gather", "Sammle folgenden Gegenstand: {action}");
+		englishTranslation.put("quest.description.gather", "Collect the following item: {action}");
+
+		germanTranslation.put("quest.description.kill", "Töte {x}x {action}");
+		englishTranslation.put("quest.description.kill", "Defeat {x} {action}");
+
 
 		
 		germanTranslation.put("quest.title.action", "Aktion ausfuehren");
 		englishTranslation.put("quest.title.action", "Perform action");
 		
-		germanTranslation.put("quest.title.location", "Aktion ausfuehren");
-		englishTranslation.put("quest.title.location", "Perform action");
+		germanTranslation.put("quest.title.location", "Zu Standort begeben");
+		englishTranslation.put("quest.title.location", "Go to Destination");
+		
+		germanTranslation.put("quest.title.gather", "Sammle Gegenstaende");
+		englishTranslation.put("quest.title.gather", "Gather Items");
+		
+		germanTranslation.put("quest.title.kill", "Töte etwas");
+		englishTranslation.put("quest.title.kill", "Kill something");
 		
 		
 		germanTranslation.put("trackable.space", "Leertaste drücken");

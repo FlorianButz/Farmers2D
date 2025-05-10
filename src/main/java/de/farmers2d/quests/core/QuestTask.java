@@ -1,4 +1,4 @@
-package de.farmers2d.quests;
+package de.farmers2d.quests.core;
 
 public class QuestTask <T> implements Cloneable{
 	
@@ -8,12 +8,14 @@ public class QuestTask <T> implements Cloneable{
 	private QuestCondition questCondition;
 	public QuestReward reward;
 	private int rewardValue;
+	private final Class<T> clazz;
 	
-	public QuestTask(QuestType type, T value, String trackable,QuestCondition questCondition) {
+	public QuestTask(QuestType type, T value, String trackable,QuestCondition questCondition, Class<T> clazz) {
 		this.type = type;
 		this.value = value;
 		this.trackable = trackable;
 		this.questCondition = questCondition;
+		this.clazz = clazz;
 	}
 	
 	public QuestType getType() {
@@ -54,7 +56,7 @@ public class QuestTask <T> implements Cloneable{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	protected QuestTask<T> clone() {
+	public QuestTask<T> clone() {
 		try {
 			return (QuestTask<T>) super.clone();
 		} catch (CloneNotSupportedException e) {
@@ -62,4 +64,8 @@ public class QuestTask <T> implements Cloneable{
 		}
 		return null;
 	}
+	
+	public Class<T> getClazz() {
+        return clazz;
+    }
 }
