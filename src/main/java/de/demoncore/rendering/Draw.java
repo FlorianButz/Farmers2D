@@ -187,7 +187,7 @@ public class Draw extends JPanel {
 			
 			if(currentGameObj == null) continue;
 			
-			if(currentGameObj.enableRendering && !currentGameObj.isDistanceCulled) {
+			if(currentGameObj.enableRendering && !(currentGameObj.isDistanceCulled && currentGameObj.distanceCulling)) {
 				if(!(currentGameObj instanceof GUIObject)) {	// Gucken ob es GUI objekt ist, weil die müssen als letztes auf den Bildschirm
 					g2dGobj.rotate(Math.toRadians(currentGameObj.getRotationZ()), currentGameObj.getPosition().x, currentGameObj.getPosition().y);
 
