@@ -3,6 +3,7 @@ package de.farmers2d.scenes;
 import de.demoncore.gameObjects.PauseMenu;
 import de.demoncore.gameObjects.Player;
 import de.demoncore.scenes.BaseScene;
+import de.demoncore.utils.Vector3;
 import de.farmers2d.tiles.TestTile;
 import de.farmers2d.tiles.core.TilePosition;
 import de.farmers2d.tiles.core.Tileset;
@@ -21,6 +22,8 @@ public class FarmersBaseScene extends BaseScene {
 		addObject(time);
 		
 		PauseMenu menu = new PauseMenu();
+		menu.inAnimationFromPosition = new Vector3(0, 2500);
+		menu.outAnimationToPosition = new Vector3(0, 2500);
 		addObject(menu);
 		
 		Tileset t = new Tileset();

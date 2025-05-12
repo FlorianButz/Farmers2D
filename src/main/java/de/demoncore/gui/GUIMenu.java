@@ -32,18 +32,18 @@ public class GUIMenu extends GameObject {
 	ColorAnimator bgInAnim;
 	ColorAnimator bgOutAnim;
 
-	protected Vector3 inAnimationFromPosition = new Vector3(0, -3000, 0);
-	protected Vector3 outAnimationToPosition = new Vector3(0, -3000, 0);
+	public Vector3 inAnimationFromPosition = new Vector3(0, -3000, 0);
+	public Vector3 outAnimationToPosition = new Vector3(0, -3000, 0);
 
-	protected EasingType inAnimationEasingType = EasingType.OutExponential;
-	protected EasingType outAnimationEasingType = EasingType.InOutQuint;
-	protected EasingType inAnimationEasingTypeBackground = EasingType.OutExponential;
-	protected EasingType outAnimationEasingTypeBackground = EasingType.InOutQuint;
+	public EasingType inAnimationEasingType = EasingType.OutExponential;
+	public EasingType outAnimationEasingType = EasingType.InOutQuint;
+	public EasingType inAnimationEasingTypeBackground = EasingType.OutExponential;
+	public EasingType outAnimationEasingTypeBackground = EasingType.InOutQuint;
 
-	protected float inAnimationTimePosition = 0.75f;
-	protected float inAnimationTimeBackground = 0.5f;
-	protected float outAnimationTimePosition = 0.75f;
-	protected float outAnimationTimeBackground = 1f;
+	public float inAnimationTimePosition = 0.75f;
+	public float inAnimationTimeBackground = 0.5f;
+	public float outAnimationTimePosition = 0.75f;
+	public float outAnimationTimeBackground = 1f;
 	
 	public Color backgroundColor = new Color(0f, 0f, 0f, 0.95f);
 	
@@ -131,8 +131,8 @@ public class GUIMenu extends GameObject {
 		if(!hasMenuBeenCreated) 
 			createMenu();
 		
-		inAnimationFromPosition = new Vector3(0, Settings.isSmallGui() ? -4500 : -2500, 0);
-		outAnimationToPosition = new Vector3(0, Settings.isSmallGui() ? -4500 : -2500, 0);
+		//inAnimationFromPosition = new Vector3(0, Settings.isSmallGui() ? -4500 : -2500, 0);
+		//outAnimationToPosition = new Vector3(0, Settings.isSmallGui() ? -4500 : -2500, 0);
 		
 		if(outAnim != null) outAnim.Stop();
 		if(bgOutAnim != null) bgOutAnim.Stop();
@@ -171,8 +171,8 @@ public class GUIMenu extends GameObject {
 
 	public void HideMenu() {
 		
-		inAnimationFromPosition = new Vector3(0, Settings.isSmallGui() ? -4500 : -2500, 0);
-		outAnimationToPosition = new Vector3(0, Settings.isSmallGui() ? -4500 : -2500, 0);
+		//inAnimationFromPosition = new Vector3(0, Settings.isSmallGui() ? -4500 : -2500, 0);
+		//outAnimationToPosition = new Vector3(0, Settings.isSmallGui() ? -4500 : -2500, 0);
 		
 		inAnim.Stop();
 		bgInAnim.Stop();
