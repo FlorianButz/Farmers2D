@@ -18,3 +18,7 @@ buildNumber.properties
 .editorconfig
 /.gradle
 /.idea
+*.class
+core/build/tmp/compileJava/previous-compilation-data.bin
+core/build/tmp/jar/MANIFEST.MF
+lwjgl3/build/tmp/compileJava/previous-compilation-data.bin
