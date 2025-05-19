@@ -20,7 +20,6 @@ public class Player extends GameObjects{
     @Override
     public void onCreation() {
         super.onCreation();
-        System.out.println("Player created");
 
         KeyHandler.instance.add(listener = new GameActionListener(){
             @Override
