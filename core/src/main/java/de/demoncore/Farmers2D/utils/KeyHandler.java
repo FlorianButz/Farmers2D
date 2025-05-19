@@ -49,8 +49,6 @@ public class KeyHandler extends InputAdapter {
             playerInput = playerInput.sub(new Vector2(0, 1));
         }
 
-
-        System.out.println(playerInput.toString());
         isAnyKeyPressed = pressedKeys.size() != 0;
         if (temp.dst(playerInput) != 0) {
             update();
