@@ -6,16 +6,17 @@ import com.badlogic.gdx.math.Vector2;
 import de.demoncore.Farmers2D.scenes.utils.ShapeEntry;
 import de.demoncore.Farmers2D.scenes.utils.Shapes;
 
-public class GameObjects {
+public class GameObject {
 
     private Shapes shapes;
     public Vector2 pos;
     public Vector2 size;
     public Color color;
+    public Vector2 velocity = Vector2.Zero.cpy();
 
     public boolean collisionEnabled = true;
 
-    public GameObjects(Shapes shapes, Vector2 pos, Vector2 size, Color color){
+    public GameObject(Shapes shapes, Vector2 pos, Vector2 size, Color color){
         this.shapes = shapes;
         this.pos = pos;
         this.size = size;

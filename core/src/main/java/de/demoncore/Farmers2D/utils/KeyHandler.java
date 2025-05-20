@@ -3,6 +3,7 @@ package de.demoncore.Farmers2D.utils;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.Vector2;
+import de.demoncore.Farmers2D.gameObjects.Player;
 
 import java.util.ArrayList;
 
@@ -40,13 +41,13 @@ public class KeyHandler extends InputAdapter {
         }
 
         if (keycode == Input.Keys.A) {
-            playerInput = playerInput.sub(new Vector2(1, 0));
+            playerInput.sub(new Vector2(1, 0));
         } else if (keycode == Input.Keys.D) {
-            playerInput = playerInput.add(new Vector2(1, 0));
+            playerInput.add(new Vector2(1, 0));
         } else if (keycode == Input.Keys.W) {
-            playerInput = playerInput.add(new Vector2(0, 1));
+            playerInput.add(new Vector2(0, 1));
         } else if (keycode == Input.Keys.S) {
-            playerInput = playerInput.sub(new Vector2(0, 1));
+            playerInput.sub(new Vector2(0, 1));
         }
 
         isAnyKeyPressed = pressedKeys.size() != 0;
@@ -65,15 +66,16 @@ public class KeyHandler extends InputAdapter {
         } // removes the lock
 
         if (keycode == Input.Keys.A) {
-            playerInput = playerInput.add(new Vector2(1, 0));
+            playerInput.add(new Vector2(1, 0));
         } else if (keycode == Input.Keys.D) {
-            playerInput = playerInput.sub(new Vector2(1, 0));
+            playerInput.sub(new Vector2(1, 0));
         } else if (keycode == Input.Keys.W) {
-            playerInput = playerInput.sub(new Vector2(0, 1));
+            playerInput.sub(new Vector2(0, 1));
         } else if (keycode == Input.Keys.S) {
-            playerInput = playerInput.add(new Vector2(0, 1));
+            playerInput.add(new Vector2(0, 1));
         }
 
+        update();
         isAnyKeyPressed = pressedKeys.size() != 0;
         return super.keyUp(keycode);
     }
@@ -89,7 +91,7 @@ public class KeyHandler extends InputAdapter {
     public void update() {
         ArrayList<GameActionListener> l = new ArrayList<>(listeners);
         for (GameActionListener g : l) {
-            g.onPlayerMovement(playerInput);
+            g.onPlayerMovement(playerInput.cpy());
         }
     }
 }

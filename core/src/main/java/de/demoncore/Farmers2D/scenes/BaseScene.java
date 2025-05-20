@@ -1,12 +1,11 @@
 package de.demoncore.Farmers2D.scenes;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.*;
 import com.badlogic.gdx.math.Vector2;
-import de.demoncore.Farmers2D.gameObjects.GameObjects;
+import de.demoncore.Farmers2D.gameObjects.GameObject;
 import de.demoncore.Farmers2D.scenes.utils.ShapeEntry;
 import de.demoncore.Farmers2D.scenes.utils.SpriteEntry;
 
@@ -22,10 +21,10 @@ public class BaseScene implements Screen {
     ArrayList<ShapeEntry> lineShapes = new ArrayList<>();
     ArrayList<SpriteEntry> sprites = new ArrayList<>();
 
-    ArrayList<GameObjects> sceneObjects = new ArrayList<>();
+    public ArrayList<GameObject> sceneObjects = new ArrayList<>();
 
 
-    public void addObject(GameObjects g){
+    public void addObject(GameObject g){
         sceneObjects.add(g);
     }
 
@@ -79,7 +78,7 @@ public class BaseScene implements Screen {
         filledShapes.add(se);
     }
 
-    public void addFillShape(GameObjects g){
+    public void addFillShape(GameObject g){
         addFillShape(g.getShapeEntry());
         sceneObjects.add(g);
     }
@@ -88,7 +87,7 @@ public class BaseScene implements Screen {
         lineShapes.add(se);
     }
 
-    public void addLineShape(GameObjects g){
+    public void addLineShape(GameObject g){
         addLineShape(g.getShapeEntry());
         sceneObjects.add(g);
     }
@@ -102,14 +101,14 @@ public class BaseScene implements Screen {
     public void show() {
         sr = new ShapeRenderer();
         sb = new SpriteBatch();
-        for(GameObjects gO : sceneObjects){
+        for(GameObject gO : sceneObjects){
             gO.onCreation();
         }
     }
 
     @Override
     public void render(float delta) {
-        for(GameObjects g : sceneObjects){
+        for(GameObject g : sceneObjects){
             g.update();
         }
         drawFilledShape();
@@ -134,7 +133,7 @@ public class BaseScene implements Screen {
 
     @Override
     public void hide() {
-        for(GameObjects gO : sceneObjects){
+        for(GameObject gO : sceneObjects){
             gO.onDestroy();
         }
     }

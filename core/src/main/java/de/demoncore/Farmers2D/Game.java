@@ -1,14 +1,23 @@
 package de.demoncore.Farmers2D;
 
 import com.badlogic.gdx.*;
+import de.demoncore.Farmers2D.gameObjects.GameObject;
+import de.demoncore.Farmers2D.scenes.BaseScene;
 import de.demoncore.Farmers2D.scenes.DefaultScene;
 import de.demoncore.Farmers2D.utils.KeyHandler;
 import de.demoncore.Farmers2D.utils.Logger;
 
+import java.util.ArrayList;
+
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. Listens to user input. */
 public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
+    public static Game instance;
 
     KeyHandler keyHandler = new KeyHandler();
+
+    public Game(){
+        instance = this;
+    }
 
     @Override
     public void create() {
@@ -44,5 +53,10 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     public void dispose() {
         super.dispose();
         getScreen().dispose();
+    }
+
+    public ArrayList<GameObject> getSceneObjects() {
+        BaseScene scene = (BaseScene) getScreen();
+        return scene.sceneObjects;
     }
 }
