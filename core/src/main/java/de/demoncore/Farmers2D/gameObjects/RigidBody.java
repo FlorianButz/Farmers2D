@@ -5,7 +5,6 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import de.demoncore.Farmers2D.Game;
 import de.demoncore.Farmers2D.scenes.utils.Shapes;
-import de.demoncore.Farmers2D.utils.Logger;
 import de.demoncore.Farmers2D.utils.UtilityMethodes;
 
 import java.util.ArrayList;
@@ -41,7 +40,7 @@ public class RigidBody extends GameObject{
     }
 
     private GameObject getCollidingObject() {
-        List<GameObject> objs = new ArrayList<>(Game.instance.getSceneObjects());
+        List<GameObject> objs = new ArrayList<>(Game.instance.getScreenObjects());
 
         for (GameObject g : objs) {
             if (g == null || !g.collisionEnabled || g == this) continue;
@@ -107,7 +106,6 @@ public class RigidBody extends GameObject{
     }
 
     public void addForce(Vector2 force) {
-        Logger.logInfo("adding Force->"+force.toString());
         velocity = velocity.add(force);
     }
 
@@ -129,6 +127,5 @@ public class RigidBody extends GameObject{
 
             velocity = velocity.scl(friction);
         }
-        //Logger.logInfo("velo->"+velocity.toString()+" pos->"+pos.toString());
     }
 }

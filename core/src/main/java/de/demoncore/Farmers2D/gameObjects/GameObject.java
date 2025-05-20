@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import de.demoncore.Farmers2D.scenes.utils.ShapeEntry;
 import de.demoncore.Farmers2D.scenes.utils.Shapes;
+import de.demoncore.Farmers2D.utils.Logger;
 
 public class GameObject {
 
@@ -13,6 +14,7 @@ public class GameObject {
     public Vector2 size;
     public Color color;
     public Vector2 velocity = Vector2.Zero.cpy();
+    public boolean isDistanceCulled = false;
 
     public boolean collisionEnabled = true;
 
@@ -28,10 +30,15 @@ public class GameObject {
     }
 
     public ShapeEntry getShapeEntry(){
-        return new ShapeEntry(shapes, pos, size, color);
+        return new ShapeEntry(shapes, pos, size, color, this);
     }
 
     public void onCreation(){}
     public void onDestroy(){}
     public void update(){}
+
+    public boolean checkDistanceCulled(Rectangle cameraViewport) {
+        //Logger.logInfo("Culled: " + isDistanceCulled + " BoundingBox: " + getBoundingBox());
+        return cameraViewport.overlaps(getBoundingBox());
+    }
 }

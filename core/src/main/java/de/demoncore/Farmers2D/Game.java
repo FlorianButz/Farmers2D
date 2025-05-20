@@ -2,8 +2,8 @@ package de.demoncore.Farmers2D;
 
 import com.badlogic.gdx.*;
 import de.demoncore.Farmers2D.gameObjects.GameObject;
-import de.demoncore.Farmers2D.scenes.BaseScene;
-import de.demoncore.Farmers2D.scenes.DefaultScene;
+import de.demoncore.Farmers2D.scenes.BaseScreen;
+import de.demoncore.Farmers2D.scenes.DefaultScreen;
 import de.demoncore.Farmers2D.utils.KeyHandler;
 import de.demoncore.Farmers2D.utils.Logger;
 
@@ -23,7 +23,7 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     public void create() {
         Gdx.input.setInputProcessor(keyHandler);
         Logger.logInfo("Setting screen to DefaultScene");
-        setScreen(new DefaultScene());
+        setScreen(new DefaultScreen());
     }
 
     @Override
@@ -55,8 +55,8 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
         getScreen().dispose();
     }
 
-    public ArrayList<GameObject> getSceneObjects() {
-        BaseScene scene = (BaseScene) getScreen();
-        return scene.sceneObjects;
+    public ArrayList<GameObject> getScreenObjects() {
+        BaseScreen scene = (BaseScreen) getScreen();
+        return scene.screenObjects;
     }
 }
