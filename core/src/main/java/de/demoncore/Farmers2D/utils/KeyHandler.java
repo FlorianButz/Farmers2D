@@ -54,6 +54,7 @@ public class KeyHandler extends InputAdapter {
         if (temp.dst(playerInput) != 0) {
             update();
         }
+
         return super.keyDown(keycode);
     }
 

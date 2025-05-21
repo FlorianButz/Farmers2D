@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import de.demoncore.Farmers2D.Game;
 import de.demoncore.Farmers2D.scenes.utils.Shapes;
+import de.demoncore.Farmers2D.utils.Logger;
 import de.demoncore.Farmers2D.utils.UtilityMethodes;
 
 import java.util.ArrayList;

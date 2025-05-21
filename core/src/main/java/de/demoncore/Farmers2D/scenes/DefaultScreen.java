@@ -21,7 +21,6 @@ public class DefaultScreen extends BaseScreen {
     @Override
     public void show() {
         Logger.logInfo("shown default Screen");
-        super.show();
 
         Player p = new Player(new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2), new Vector2(25, 25));
         p.color = Color.GRAY;
@@ -29,6 +28,7 @@ public class DefaultScreen extends BaseScreen {
 
         tempObstacle();
 
+        //TODO: adding GUI Buttons and components
 
         super.show();
     }

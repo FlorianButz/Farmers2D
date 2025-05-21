@@ -5,15 +5,16 @@ import com.badlogic.gdx.math.Vector2;
 import de.demoncore.Farmers2D.scenes.utils.Shapes;
 import de.demoncore.Farmers2D.utils.GameActionListener;
 import de.demoncore.Farmers2D.utils.KeyHandler;
+import de.demoncore.Farmers2D.utils.Logger;
 
 public class Player extends RigidBody {
 
-    public static Player _instance;
+    public static Player instance;
     public GameActionListener listener;
 
     public Player(Vector2 pos, Vector2 size) {
         super(Shapes.Rectangle, pos, size, Color.WHITE);
-        _instance = this;
+        instance = this;
     }
 
     @Override

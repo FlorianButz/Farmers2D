@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.*;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.demoncore.Farmers2D.gameObjects.GameObject;
@@ -33,6 +34,7 @@ public class BaseScreen implements Screen {
     ArrayList<SpriteEntry> sprites = new ArrayList<>();
 
     public ArrayList<GameObject> screenObjects = new ArrayList<>();
+    protected Stage stage;
 
 
     public void addObject(GameObject g){
@@ -132,7 +134,7 @@ public class BaseScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        camera.position.lerp(new Vector3(Player._instance.pos.x, Player._instance.pos.y, 0), 0.1f);
+        camera.position.lerp(new Vector3(Player.instance.pos.x, Player.instance.pos.y, 0), 0.1f);
 
         camera.update();
         sr.setProjectionMatrix(camera.combined);
@@ -189,7 +191,9 @@ public class BaseScreen implements Screen {
     }
 
     @Override
-    public void dispose() {
+    public void dispose() {}
 
+    public Stage getStage() {
+        return stage;
     }
 }
