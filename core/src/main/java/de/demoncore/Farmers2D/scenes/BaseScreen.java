@@ -35,11 +35,13 @@ public class BaseScreen implements Screen {
     ArrayList<SpriteEntry> sprites = new ArrayList<>();
 
     public ArrayList<GameObject> screenObjects = new ArrayList<>();
-    protected Stage stage;
-
 
     public void addObject(GameObject g){
         screenObjects.add(g);
+    }
+
+    public BaseScreen(){
+        initialize();
     }
 
     public void drawFilledShape(){
@@ -113,9 +115,7 @@ public class BaseScreen implements Screen {
         sprites.add(se);
     }
 
-
-    @Override
-    public void show() {
+    public void initialize(){
         sr = new ShapeRenderer();
         sb = new SpriteBatch();
 
@@ -125,7 +125,10 @@ public class BaseScreen implements Screen {
 
         camera.position.set(windowSize.x / 2f, windowSize.y / 2f, 0);
         camera.update();
+    }
 
+    @Override
+    public void show() {
         for(GameObject gO : screenObjects){
             gO.onCreation();
         }
@@ -195,7 +198,5 @@ public class BaseScreen implements Screen {
     @Override
     public void dispose() {}
 
-    public Stage getStage() {
-        return stage;
-    }
+
 }

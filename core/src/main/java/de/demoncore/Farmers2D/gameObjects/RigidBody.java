@@ -98,13 +98,8 @@ public class RigidBody extends GameObject{
         return new Vector2(pushX, pushY);
     }
 
-    protected void onCollision(Rectangle thisObject, Rectangle otherObject) {
-        // Override in subclasses
-    }
-
-    protected void onCollision(GameObject thisObject, GameObject otherObject) {
-        // Override in subclasses
-    }
+    protected void onCollision(Rectangle thisObject, Rectangle otherObject) {}
+    protected void onCollision(GameObject thisObject, GameObject otherObject) {}
 
     public void addForce(Vector2 force) {
         velocity = velocity.add(force);
@@ -113,7 +108,7 @@ public class RigidBody extends GameObject{
     @Override
     public void update() {
         super.update();
-        //if(GameLogic.IsGamePaused()) return;
+        if(Game.instance.isPaused) return;
 
         // Store the last position before movement
         lastPosition = new Vector2(pos.x, pos.y);

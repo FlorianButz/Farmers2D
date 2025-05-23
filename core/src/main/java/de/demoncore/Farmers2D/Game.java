@@ -5,7 +5,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import de.demoncore.Farmers2D.gameObjects.GameObject;
 import de.demoncore.Farmers2D.scenes.BaseScreen;
 import de.demoncore.Farmers2D.scenes.DefaultScreen;
-import de.demoncore.Farmers2D.scenes.TestScreen;
+import de.demoncore.Farmers2D.scenes.GUIScreen;
+import de.demoncore.Farmers2D.scenes.PauseMenu;
 import de.demoncore.Farmers2D.utils.KeyHandler;
 import de.demoncore.Farmers2D.utils.Logger;
 
@@ -17,9 +18,12 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
 
     KeyHandler keyHandler = new KeyHandler();
     Stage currentStage;
+    private ArrayList<Screen> screens = new ArrayList<>();
     private int defaultScreen = 1;
 
     InputMultiplexer multiplexer = new InputMultiplexer();
+
+    public boolean isPaused = false;
 
     public Game(){
         instance = this;
@@ -32,8 +36,12 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
 
         Gdx.input.setInputProcessor(multiplexer);
         Logger.logInfo("Setting screen to DefaultScene");
-        if(defaultScreen == 0) setScreen(new DefaultScreen());
-        if(defaultScreen == 1) setScreen(new TestScreen());
+
+        screens.add(new DefaultScreen());
+        screens.add(new GUIScreen());
+        screens.add(new PauseMenu());
+
+        switchScreens(defaultScreen);
     }
 
     @Override
@@ -74,13 +82,13 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     public void setScreen(Screen screen) {
         super.setScreen(screen);
         if (screen instanceof BaseScreen) {
-            BaseScreen bs = (BaseScreen) screen;
+            GUIScreen bs = (GUIScreen) screen;
             currentStage = bs.getStage();
 
             multiplexer.clear();
             multiplexer.addProcessor(keyHandler);
             if (currentStage != null) {
-                multiplexer.addProcessor(currentStage); // Stage danach
+                multiplexer.addProcessor(currentStage); // Stage later to stop input loss
             }
 
             Gdx.input.setInputProcessor(multiplexer);
@@ -88,15 +96,6 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     }
 
     public void switchScreens(int screen){
-        switch (screen){
-            case 0:
-                setScreen(new DefaultScreen());
-                break;
-            case 1:
-                setScreen(new TestScreen());
-                break;
-            default:
-                throw  new IllegalArgumentException("invalid Screen->"+screen);
-        }
+        setScreen(screens.get(screen));
     }
 }
