@@ -5,7 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import de.demoncore.Farmers2D.gameObjects.GameObject;
 import de.demoncore.Farmers2D.scenes.BaseScreen;
 import de.demoncore.Farmers2D.scenes.DefaultScreen;
-import de.demoncore.Farmers2D.scenes.utils.TestScreen;
+import de.demoncore.Farmers2D.scenes.TestScreen;
 import de.demoncore.Farmers2D.utils.KeyHandler;
 import de.demoncore.Farmers2D.utils.Logger;
 
@@ -17,6 +17,7 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
 
     KeyHandler keyHandler = new KeyHandler();
     Stage currentStage;
+    private int defaultScreen = 1;
 
     InputMultiplexer multiplexer = new InputMultiplexer();
 
@@ -31,8 +32,8 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
 
         Gdx.input.setInputProcessor(multiplexer);
         Logger.logInfo("Setting screen to DefaultScene");
-        //setScreen(new DefaultScreen());
-        setScreen(new TestScreen());
+        if(defaultScreen == 0) setScreen(new DefaultScreen());
+        if(defaultScreen == 1) setScreen(new TestScreen());
     }
 
     @Override
@@ -83,6 +84,19 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
             }
 
             Gdx.input.setInputProcessor(multiplexer);
+        }
+    }
+
+    public void switchScreens(int screen){
+        switch (screen){
+            case 0:
+                setScreen(new DefaultScreen());
+                break;
+            case 1:
+                setScreen(new TestScreen());
+                break;
+            default:
+                throw  new IllegalArgumentException("invalid Screen->"+screen);
         }
     }
 }

@@ -1,4 +1,4 @@
-package de.demoncore.Farmers2D.scenes.utils;
+package de.demoncore.Farmers2D.scenes;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -8,8 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import de.demoncore.Farmers2D.Game;
 import de.demoncore.Farmers2D.gameObjects.Player;
-import de.demoncore.Farmers2D.scenes.BaseScreen;
 import de.demoncore.Farmers2D.utils.Logger;
 
 public class TestScreen extends BaseScreen {
@@ -32,6 +32,15 @@ public class TestScreen extends BaseScreen {
             }
         });
 
+        TextButton b2 = new TextButton("switchScreens", skin);
+        b2.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                Game.instance.switchScreens(0);
+            }
+        });
+
         // Table for dynamic centering
         Table table = new Table();
         table.setFillParent(true); // makes the table fill the whole screen
@@ -39,6 +48,7 @@ public class TestScreen extends BaseScreen {
         table.center(); // center contents
 
         table.add(button).width(200).height(50); // optional: set size
+        table.add(b2).width(200).height(50);
         stage.addActor(table);
 
         Player p = new Player(new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2), new Vector2(25, 25));

@@ -28,6 +28,7 @@ public class BaseScreen implements Screen {
 
     protected OrthographicCamera camera;
     protected Viewport viewport;
+    protected GameObject cameraFollowObject;
 
     ArrayList<ShapeEntry> filledShapes = new ArrayList<>();
     ArrayList<ShapeEntry> lineShapes = new ArrayList<>();
@@ -134,12 +135,13 @@ public class BaseScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        camera.position.lerp(new Vector3(Player.instance.pos.x, Player.instance.pos.y, 0), 0.1f);
+        if(cameraFollowObject != null) {
+            camera.position.lerp(new Vector3(cameraFollowObject.pos.x, cameraFollowObject.pos.y, 0), 0.1f);
 
-        camera.update();
-        sr.setProjectionMatrix(camera.combined);
-        sb.setProjectionMatrix(camera.combined);
-
+            camera.update();
+            sr.setProjectionMatrix(camera.combined);
+            sb.setProjectionMatrix(camera.combined);
+        }
         Rectangle viewportRect = calcViewport();
 
         for(GameObject g : screenObjects){

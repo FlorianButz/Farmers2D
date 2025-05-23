@@ -24,11 +24,10 @@ public class DefaultScreen extends BaseScreen {
 
         Player p = new Player(new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2), new Vector2(25, 25));
         p.color = Color.GRAY;
+        cameraFollowObject = p;
         addFillShape(p);
 
         tempObstacle();
-
-        //TODO: adding GUI Buttons and components
 
         super.show();
     }
