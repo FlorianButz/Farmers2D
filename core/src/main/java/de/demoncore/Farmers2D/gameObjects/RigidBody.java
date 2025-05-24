@@ -5,8 +5,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import de.demoncore.Farmers2D.Game;
 import de.demoncore.Farmers2D.scenes.utils.Shapes;
-import de.demoncore.Farmers2D.utils.Logger;
-import de.demoncore.Farmers2D.utils.UtilityMethodes;
+import de.demoncore.Farmers2D.utils.UtilityMethods;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +59,7 @@ public class RigidBody extends GameObject{
     private void handleCollision(GameObject collidingObject, Vector2 moveVector) {
         Rectangle thisObj = getBoundingBox();
         Rectangle otherObj = collidingObject.getBoundingBox();
-        Rectangle intersection = UtilityMethodes.getIntersection(thisObj, otherObj);
+        Rectangle intersection = UtilityMethods.getIntersection(thisObj, otherObj);
 
         // Calculate push vector based on intersection and movement direction
         Vector2 pushVector = calculatePushVector(intersection, moveVector);

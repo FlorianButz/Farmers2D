@@ -81,18 +81,35 @@ public class KeyHandler extends InputAdapter {
         return super.keyUp(keycode);
     }
 
-    public void add(GameActionListener gameActionListener) {
+    /**
+     * Adds a new GameActionListener to receive input events.
+     * @param gameActionListener the listener to add
+     * @param name a name for logging/debugging purposes
+     */
+    public void add(GameActionListener gameActionListener, String name) {
         listeners.add(gameActionListener);
+        Logger.logInfo("added new Listener (" + name + ") newSize->" + listeners.size());
     }
 
-    public void remove(GameActionListener listener) {
+    /**
+     * Removes a previously added GameActionListener.
+     * @param listener the listener to remove
+     * @param name a name for logging/debugging purposes
+     */
+    public void remove(GameActionListener listener, String name) {
         listeners.remove(listener);
+        Logger.logInfo("removed listener (" + name + ") newSize->" + listeners.size());
     }
 
+    /**
+     * Notifies all registered listeners about the current player movement input.
+     * Sends a copy of the current input vector to prevent modification.
+     */
     public void update() {
         ArrayList<GameActionListener> l = new ArrayList<>(listeners);
         for (GameActionListener g : l) {
             g.onPlayerMovement(playerInput.cpy());
         }
     }
+
 }

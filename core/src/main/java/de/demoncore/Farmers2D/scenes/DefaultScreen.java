@@ -5,30 +5,51 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import de.demoncore.Farmers2D.Game;
 import de.demoncore.Farmers2D.gameObjects.GameObject;
 import de.demoncore.Farmers2D.gameObjects.Player;
 import de.demoncore.Farmers2D.scenes.utils.Shapes;
+import de.demoncore.Farmers2D.utils.GameActionListener;
+import de.demoncore.Farmers2D.utils.KeyHandler;
 import de.demoncore.Farmers2D.utils.Logger;
 
 public class DefaultScreen extends BaseScreen {
 
     private Color background = Color.BLACK;
+    private GameActionListener listener;
 
+    /**
+     * Constructs the default screen and logs its creation.
+     */
     public DefaultScreen(){
         Logger.logInfo("loaded new Default Screen");
+    }
+
+    @Override
+    public void initialize() {
+        super.initialize();
+        
+        Player p = new Player(new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2), new Vector2(25, 25));
+        p.color = Color.GRAY;
+        cameraFollowObject = p;
+        addFillShape(p);
+
+
+        tempObstacle();
+
     }
 
     @Override
     public void show() {
         Logger.logInfo("shown default Screen");
 
-        Player p = new Player(new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2), new Vector2(25, 25));
-        p.color = Color.GRAY;
-        cameraFollowObject = p;
-        addFillShape(p);
-
-        tempObstacle();
-
+        KeyHandler.instance.add(listener = new GameActionListener(){
+            @Override
+            public void onEscapePressed() {
+                super.onEscapePressed();
+                Game.instance.switchScreens(2);
+            }
+        }, "DefaultScreen");
         super.show();
     }
 
@@ -42,6 +63,10 @@ public class DefaultScreen extends BaseScreen {
 
     }
 
+    /**
+     * Adds temporary obstacles to the screen.
+     * These are randomly placed white rectangles used for testing.
+     */
     public void tempObstacle(){
         for (int i = 0; i < 200; i++) {
             GameObject g = new GameObject(Shapes.Rectangle,
@@ -52,4 +77,9 @@ public class DefaultScreen extends BaseScreen {
         }
     }
 
+    @Override
+    public void hide() {
+        super.hide();
+        KeyHandler.instance.remove(listener, "defaultScreen");
+    }
 }

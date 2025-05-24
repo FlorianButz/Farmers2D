@@ -1,6 +1,7 @@
 package de.demoncore.Farmers2D;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import de.demoncore.Farmers2D.gameObjects.GameObject;
 import de.demoncore.Farmers2D.scenes.BaseScreen;
@@ -12,14 +13,14 @@ import de.demoncore.Farmers2D.utils.Logger;
 
 import java.util.ArrayList;
 
-/** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. Listens to user input. */
+/** Main game class managing screens and input */
 public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     public static Game instance;
 
     KeyHandler keyHandler = new KeyHandler();
     Stage currentStage;
     private ArrayList<Screen> screens = new ArrayList<>();
-    private int defaultScreen = 1;
+    private int defaultScreen = 0;
 
     InputMultiplexer multiplexer = new InputMultiplexer();
 
@@ -73,6 +74,10 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
         getScreen().dispose();
     }
 
+    /**
+     * Returns list of game objects on the current screen.
+     * @return list of GameObject
+     */
     public ArrayList<GameObject> getScreenObjects() {
         BaseScreen scene = (BaseScreen) getScreen();
         return scene.screenObjects;
@@ -81,7 +86,7 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     @Override
     public void setScreen(Screen screen) {
         super.setScreen(screen);
-        if (screen instanceof BaseScreen) {
+        if (screen instanceof GUIScreen) {
             GUIScreen bs = (GUIScreen) screen;
             currentStage = bs.getStage();
 
@@ -95,7 +100,22 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
         }
     }
 
+    /**
+     * Switches between screens by index.
+     * Sets a screenshot background for the PauseMenu.
+     * @param screen index of screen to switch to
+     */
     public void switchScreens(int screen){
+        if(screens.get(screen) instanceof PauseMenu){
+            PauseMenu pM = (PauseMenu) screens.get(screen);
+            BaseScreen bS = (BaseScreen) getScreen();
+            TextureRegion texture = bS.takeScreenshotTexture();
+
+            pM.setBackground(texture);
+            setScreen(pM);
+            return;
+        }
+
         setScreen(screens.get(screen));
     }
 }

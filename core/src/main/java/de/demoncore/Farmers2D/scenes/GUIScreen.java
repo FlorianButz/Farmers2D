@@ -1,17 +1,11 @@
 package de.demoncore.Farmers2D.scenes;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import de.demoncore.Farmers2D.Game;
-import de.demoncore.Farmers2D.gameObjects.Player;
-import de.demoncore.Farmers2D.utils.GameActionListener;
-import de.demoncore.Farmers2D.utils.KeyHandler;
 
 import static com.badlogic.gdx.scenes.scene2d.ui.Value.*;
 
@@ -36,25 +30,22 @@ public class GUIScreen extends BaseScreen {
         stage.addActor(table);
     }
 
-    GameActionListener listener;
-
     @Override
     public void show() {
 
-        KeyHandler.instance.add(listener = new GameActionListener(){
-            @Override
-            public void onEscapePressed() {
-                super.onEscapePressed();
-                Game.instance.switchScreens(2);
-            }
-        });
+        table.clear();
 
-        Player p = new Player(new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2), new Vector2(25, 25));
-        p.color = Color.GRAY;
-        addFillShape(p);
         super.show();
     }
 
+    /**
+     * Adds a UI component (Actor) to the table with specified width and height in percent.
+     *
+     * @param component     the UI element to add (e.g., Button, Label, Image)
+     * @param widthPercent  width in percent of the parent table (0.0f to 1.0f)
+     * @param heightPercent height in percent of the parent table (0.0f to 1.0f)
+     * @param <T>           type of the Actor
+     */
     public <T extends Actor> void addComponent(T component, float widthPercent, float heightPercent) {
         table.add(component)
                 .width(percentWidth(widthPercent, table))
@@ -84,7 +75,17 @@ public class GUIScreen extends BaseScreen {
         skin.dispose();
     }
 
+    /**
+     * Returns the stage used to render UI elements.
+     *
+     * @return the stage instance
+     */
     public Stage getStage() {
         return stage;
+    }
+
+    @Override
+    public void hide() {
+        super.hide();
     }
 }

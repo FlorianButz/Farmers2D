@@ -1,17 +1,22 @@
 package de.demoncore.Farmers2D.scenes;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import de.demoncore.Farmers2D.Game;
 import de.demoncore.Farmers2D.utils.Logger;
 
 public class PauseMenu extends GUIScreen{
 
     Skin skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
+
+    private TextureRegion backgroundRegion;
+    private Image backgroundImage;
 
     @Override
     public void show() {
@@ -39,9 +44,34 @@ public class PauseMenu extends GUIScreen{
         });
         //settings.getLabel().setFontScale(1.5f);   //<-disabled lässt Font verschwimmen
         addComponent(settings, 0.3f, 0.075f);
-
-
-
-
     }
+
+    @Override
+    public void render(float delta) {
+        super.render(delta);
+    }
+
+    /**
+     * Sets the background image of the pause menu using a TextureRegion.
+     * Disposes the old background texture and removes the old image actor if they exist.
+     * Adds the new background image at the bottom of the stage actor stack.
+     *
+     * @param region the TextureRegion to use as the background image
+     */
+    public void setBackground(TextureRegion region) {
+        if (backgroundRegion != null && backgroundRegion.getTexture() != null) {    //disposing old Image if already existing
+            backgroundRegion.getTexture().dispose();
+        }
+
+        backgroundRegion = region;
+
+        if (backgroundImage != null) {
+            backgroundImage.remove();   //removing old Image from every Parent
+        }
+
+        backgroundImage = new Image(new TextureRegionDrawable(backgroundRegion));
+        backgroundImage.setFillParent(true);
+        stage.getRoot().addActorAt(0, backgroundImage); // adding background
+    }
+
 }

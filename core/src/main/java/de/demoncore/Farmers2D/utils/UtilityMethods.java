@@ -2,8 +2,16 @@ package de.demoncore.Farmers2D.utils;
 
 import com.badlogic.gdx.math.Rectangle;
 
-public class UtilityMethodes {
+public class UtilityMethods {
 
+    /**
+     * Returns the intersection rectangle of two given rectangles.
+     * If they do not overlap, returns null.
+     *
+     * @param a first rectangle
+     * @param b second rectangle
+     * @return the overlapping Rectangle area or null if no overlap
+     */
     public static Rectangle getIntersection(Rectangle a, Rectangle b) {
         if (!a.overlaps(b)) return null;
 
@@ -14,5 +22,6 @@ public class UtilityMethodes {
 
         return new Rectangle(x, y, width, height);
     }
+
 
 }
