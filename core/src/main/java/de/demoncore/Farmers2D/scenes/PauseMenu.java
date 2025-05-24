@@ -1,6 +1,8 @@
 package de.demoncore.Farmers2D.scenes;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -17,10 +19,28 @@ public class PauseMenu extends GUIScreen{
 
     private TextureRegion backgroundRegion;
     private Image backgroundImage;
+    private Image blackOverlay;
+
+    @Override
+    public void initialize() {
+        super.initialize();
+        Pixmap pixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+        pixmap.setColor(0, 0, 0, 1);
+        pixmap.fill();
+        Texture blackTexture = new Texture(pixmap);
+        pixmap.dispose();
+
+        // create an Image with the black texture
+        blackOverlay = new Image(new TextureRegionDrawable(new TextureRegion(blackTexture)));
+        blackOverlay.setFillParent(true);
+        blackOverlay.setColor(0, 0, 0, 0.75f);
+
+    }
 
     @Override
     public void show() {
         super.show();
+        Game.instance.isPaused = true;
 
         TextButton backToGame = new TextButton("back to game", skin);
         backToGame.addListener(new ClickListener(){
@@ -67,11 +87,18 @@ public class PauseMenu extends GUIScreen{
 
         if (backgroundImage != null) {
             backgroundImage.remove();   //removing old Image from every Parent
+            blackOverlay.remove();
         }
 
         backgroundImage = new Image(new TextureRegionDrawable(backgroundRegion));
         backgroundImage.setFillParent(true);
         stage.getRoot().addActorAt(0, backgroundImage); // adding background
+        stage.getRoot().addActorAt(1, blackOverlay);
     }
 
+    @Override
+    public void hide() {
+        super.hide();
+        Game.instance.isPaused = false;
+    }
 }
