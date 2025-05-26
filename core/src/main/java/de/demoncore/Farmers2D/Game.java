@@ -25,6 +25,7 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     InputMultiplexer multiplexer = new InputMultiplexer();
 
     public boolean isPaused = false;
+    public boolean isInDebug = true;
 
     public Game(){
         instance = this;

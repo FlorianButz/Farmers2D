@@ -2,10 +2,8 @@ package de.demoncore.Farmers2D.scenes;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -17,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import de.demoncore.Farmers2D.Game;
 import de.demoncore.Farmers2D.gameObjects.GameObject;
 import de.demoncore.Farmers2D.gameObjects.Player;
 import de.demoncore.Farmers2D.scenes.utils.ShapeEntry;
@@ -30,6 +29,7 @@ public class BaseScreen implements Screen {
     Vector2 windowSize = new Vector2(1200, 800);
     protected ShapeRenderer sr;
     protected SpriteBatch sb;
+    protected ShapeRenderer srDebug;
 
     protected OrthographicCamera camera;
     protected Viewport viewport;
@@ -38,6 +38,8 @@ public class BaseScreen implements Screen {
     ArrayList<ShapeEntry> filledShapes = new ArrayList<>();
     ArrayList<ShapeEntry> lineShapes = new ArrayList<>();
     ArrayList<SpriteEntry> sprites = new ArrayList<>();
+
+    private BitmapFont debugFont = new BitmapFont();
 
     public ArrayList<GameObject> screenObjects = new ArrayList<>();
 
@@ -59,6 +61,7 @@ public class BaseScreen implements Screen {
      */
     public void drawFilledShape(){
         sr.begin(ShapeType.Filled);
+
         for (ShapeEntry entry : filledShapes) {
             GameObject obj = entry.getGameObject();
             if (obj != null && obj.isDistanceCulled) continue;
@@ -87,7 +90,12 @@ public class BaseScreen implements Screen {
      */
     public void drawLineShape(){
         sr.begin(ShapeType.Line);
-        for (ShapeEntry entry : filledShapes) {
+
+        for (ShapeEntry entry : lineShapes) {
+            GameObject obj = entry.getGameObject();
+            if (obj != null && obj.isDistanceCulled) continue;
+
+            sr.setColor(entry.getColor());
             switch (entry.getShape()) {
                 case Rectangle:
                     sr.rect(entry.getPos().x, entry.getPos().y, entry.getSize().x, entry.getSize().y);
@@ -112,6 +120,63 @@ public class BaseScreen implements Screen {
         sb.begin();
         for(SpriteEntry s : sprites) sb.draw(s.getSprite(), s.getVector().x, s.getVector().y);
         sb.end();
+    }
+
+    private void drawDebug(ShapeEntry entry){
+        GameObject obj = entry.getGameObject();
+        if (obj != null && obj.isDistanceCulled) return;
+
+        srDebug.setColor(entry.getGameObject().collisionEnabled ? Color.LIME : Color.RED);
+
+        float padding = 2f;
+        float posX = entry.getPos().x - padding;
+        float posY = entry.getPos().y - padding;
+        float sizeX = entry.getSize().x + padding * 2;
+        float sizeY = entry.getSize().y + padding * 2;
+        String objClass = obj.getClass().getSimpleName();
+
+
+        switch (entry.getShape()) {
+            case Rectangle:
+                srDebug.rect(posX, posY, sizeX, sizeY);
+                break;
+            case Oval:
+                srDebug.ellipse(posX, posY, sizeX ,sizeY);
+                break;
+            case Point:
+                srDebug.point(posX, posY, 0);
+                break;
+            default:
+                throw new IllegalStateException("unknown Shape: " + entry.getShape());
+        }
+    }
+
+    private void drawAllDebugShapes() {
+        srDebug.begin(ShapeType.Line);
+        for (ShapeEntry entry : filledShapes) {
+            drawDebug(entry);
+        }
+        for (ShapeEntry entry : lineShapes) {
+            drawDebug(entry);
+        }
+        srDebug.end();
+    }
+
+    private void drawDebugText() {
+        sb.begin();
+        for (ShapeEntry entry : filledShapes) drawDebugLabel(entry);
+        for (ShapeEntry entry : lineShapes) drawDebugLabel(entry);
+        sb.end();
+    }
+
+    private void drawDebugLabel(ShapeEntry entry) {
+        GameObject obj = entry.getGameObject();
+        if (obj == null || obj.isDistanceCulled) return;
+
+        String className = obj.getClass().getSimpleName();
+        Vector2 pos = entry.getPos();
+        debugFont.setColor(Color.WHITE);
+        debugFont.draw(sb, className, pos.x, pos.y + entry.getSize().y + 12); // 12px über dem Shape
     }
 
     /**
@@ -164,6 +229,7 @@ public class BaseScreen implements Screen {
     public void initialize(){
         sr = new ShapeRenderer();
         sb = new SpriteBatch();
+        srDebug = new ShapeRenderer();
 
         camera = new OrthographicCamera();
         viewport = new FitViewport(windowSize.x, windowSize.y, camera);
@@ -171,6 +237,8 @@ public class BaseScreen implements Screen {
 
         camera.position.set(windowSize.x / 2f, windowSize.y / 2f, 0);
         camera.update();
+
+        debugFont.getData().setScale(0.8f);
     }
 
     @Override
@@ -190,6 +258,7 @@ public class BaseScreen implements Screen {
             camera.update();
             sr.setProjectionMatrix(camera.combined);
             sb.setProjectionMatrix(camera.combined);
+            srDebug.setProjectionMatrix(camera.combined);
         }
         Rectangle viewportRect = calcViewport();
 
@@ -206,6 +275,10 @@ public class BaseScreen implements Screen {
         drawFilledShape();
         drawLineShape();
         drawSprites();
+        if(Game.instance.isInDebug){
+            drawAllDebugShapes();
+            drawDebugText();
+        }
     }
 
     /**
