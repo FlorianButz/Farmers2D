@@ -17,6 +17,7 @@ public class GameObject {
     public Color color;
     public Vector2 velocity = Vector2.Zero.cpy();
     public boolean isDistanceCulled = false;
+    private final Rectangle boundingBox = new Rectangle();
 
     public boolean collisionEnabled = true;
 
@@ -40,8 +41,9 @@ public class GameObject {
      *
      * @return the bounding rectangle of the object
      */
-    public Rectangle getBoundingBox(){
-        return new Rectangle(pos.x, pos.y, size.x, size.y);
+    public Rectangle getBoundingBox() {
+        boundingBox.set(pos.x, pos.y, size.x, size.y);
+        return boundingBox;
     }
 
     /**
