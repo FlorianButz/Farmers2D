@@ -10,6 +10,7 @@ import de.demoncore.Farmers2D.scenes.GUIScreen;
 import de.demoncore.Farmers2D.scenes.PauseMenu;
 import de.demoncore.Farmers2D.utils.KeyHandler;
 import de.demoncore.Farmers2D.utils.Logger;
+import de.demoncore.Farmers2D.utils.Resources;
 
 import java.util.ArrayList;
 
@@ -18,6 +19,7 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     public static Game instance;
 
     KeyHandler keyHandler = new KeyHandler();
+    Resources resources;
     Stage currentStage;
     private ArrayList<Screen> screens = new ArrayList<>();
     private int defaultScreen = 0;
@@ -28,6 +30,7 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     public boolean isInDebug = true;
 
     public Game(){
+        resources = new Resources();
         instance = this;
     }
 
@@ -118,5 +121,6 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
         }
 
         setScreen(screens.get(screen));
+        if(!Resources.instance.initialized) Resources.instance.init();
     }
 }

@@ -11,16 +11,14 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.*;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.demoncore.Farmers2D.Game;
 import de.demoncore.Farmers2D.gameObjects.GameObject;
-import de.demoncore.Farmers2D.gameObjects.Player;
 import de.demoncore.Farmers2D.scenes.utils.ShapeEntry;
 import de.demoncore.Farmers2D.scenes.utils.SpriteEntry;
 import de.demoncore.Farmers2D.utils.Logger;
+import de.demoncore.Farmers2D.utils.Resources;
 
 import java.util.ArrayList;
 
@@ -39,7 +37,7 @@ public class BaseScreen implements Screen {
     ArrayList<ShapeEntry> lineShapes = new ArrayList<>();
     ArrayList<SpriteEntry> sprites = new ArrayList<>();
 
-    private BitmapFont debugFont = new BitmapFont();
+    private BitmapFont debugFont;
 
     public ArrayList<GameObject> screenObjects = new ArrayList<>();
 
@@ -133,8 +131,6 @@ public class BaseScreen implements Screen {
         float posY = entry.getPos().y - padding;
         float sizeX = entry.getSize().x + padding * 2;
         float sizeY = entry.getSize().y + padding * 2;
-        String objClass = obj.getClass().getSimpleName();
-
 
         switch (entry.getShape()) {
             case Rectangle:
@@ -175,8 +171,14 @@ public class BaseScreen implements Screen {
 
         String className = obj.getClass().getSimpleName();
         Vector2 pos = entry.getPos();
-        debugFont.setColor(Color.WHITE);
-        debugFont.draw(sb, className, pos.x, pos.y + entry.getSize().y + 12); // 12px über dem Shape
+        if(debugFont == null && Resources.instance.initialized){
+            debugFont = Resources.getFontTTF(Resources.debugFont, 10);
+            Logger.logWarning("loaded debugFont");
+        }
+        if(debugFont != null) {
+            debugFont.setColor(entry.getGameObject().collisionEnabled ? Color.LIME : Color.RED);
+            debugFont.draw(sb, className, pos.x, pos.y + entry.getSize().y + 12); // 12px über dem Shape
+        }
     }
 
     /**
@@ -237,8 +239,6 @@ public class BaseScreen implements Screen {
 
         camera.position.set(windowSize.x / 2f, windowSize.y / 2f, 0);
         camera.update();
-
-        debugFont.getData().setScale(0.8f);
     }
 
     @Override
