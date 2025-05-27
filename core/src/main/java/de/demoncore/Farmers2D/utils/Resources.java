@@ -7,14 +7,16 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Timer;
 
 public class Resources {
 
-    public static FileHandle debugFont;
     public static Resources instance;
     public boolean initialized;
 
+    public static FileHandle debugFont;
+    public static Skin uiSkin;
 
     public Resources(){
         instance = this;
@@ -23,6 +25,7 @@ public class Resources {
     public void init() {
         // Font laden
         debugFont = Gdx.files.internal("fonts/0.ttf");
+        uiSkin = new Skin(Gdx.files.internal("ui/uiskin.json"));
         Logger.logInfo("Resources loaded");
         initialized = true;
     }

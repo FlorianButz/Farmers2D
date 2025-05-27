@@ -5,15 +5,14 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import de.demoncore.Farmers2D.gameObjects.GameObject;
 import de.demoncore.Farmers2D.saveFiles.SaveManager;
-import de.demoncore.Farmers2D.scenes.BaseScreen;
-import de.demoncore.Farmers2D.scenes.DefaultScreen;
-import de.demoncore.Farmers2D.scenes.GUIScreen;
-import de.demoncore.Farmers2D.scenes.PauseMenu;
+import de.demoncore.Farmers2D.scenes.*;
 import de.demoncore.Farmers2D.utils.KeyHandler;
 import de.demoncore.Farmers2D.utils.Logger;
 import de.demoncore.Farmers2D.utils.Resources;
+import de.demoncore.Farmers2D.utils.Translation;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /** Main game class managing screens and input */
 public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
@@ -22,8 +21,8 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     KeyHandler keyHandler = new KeyHandler();
     Resources resources;
     Stage currentStage;
-    private ArrayList<Screen> screens = new ArrayList<>();
-    private int defaultScreen = 0;
+    private HashMap<String, Screen> screens = new HashMap<>();
+    private String defaultScreen = "main";
 
     InputMultiplexer multiplexer = new InputMultiplexer();
 
@@ -36,15 +35,14 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
 
     @Override
     public void create() {
+        Translation translation = new Translation();
+        translation.init();
+
         multiplexer.addProcessor(keyHandler);
         if(currentStage != null) multiplexer.addProcessor(currentStage);
 
         Gdx.input.setInputProcessor(multiplexer);
         Logger.logInfo("Setting screen to DefaultScene");
-
-        screens.add(new DefaultScreen());
-        screens.add(new GUIScreen());
-        screens.add(new PauseMenu());
 
         switchScreens(defaultScreen);
         Settings.load();
@@ -94,8 +92,8 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     public void setScreen(Screen screen) {
         super.setScreen(screen);
         if (screen instanceof GUIScreen) {
-            GUIScreen bs = (GUIScreen) screen;
-            currentStage = bs.getStage();
+            GUIScreen gs = (GUIScreen) screen;
+            currentStage = gs.getStage();
 
             multiplexer.clear();
             multiplexer.addProcessor(keyHandler);
@@ -112,7 +110,14 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
      * Sets a screenshot background for the PauseMenu.
      * @param screen index of screen to switch to
      */
-    public void switchScreens(int screen){
+    public void switchScreens(String screen){
+        if(!Resources.instance.initialized){
+            Resources.instance.init();
+            screens.put("main", new MainMenu());
+            screens.put("default", new DefaultScreen());
+            screens.put("pause", new PauseMenu());
+        }
+
         if(screens.get(screen) instanceof PauseMenu){
             PauseMenu pM = (PauseMenu) screens.get(screen);
             BaseScreen bS = (BaseScreen) getScreen();
@@ -124,6 +129,5 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
         }
 
         setScreen(screens.get(screen));
-        if(!Resources.instance.initialized) Resources.instance.init();
     }
 }

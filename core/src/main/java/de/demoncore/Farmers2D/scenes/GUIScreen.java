@@ -42,14 +42,14 @@ public class GUIScreen extends BaseScreen {
      * Adds a UI component (Actor) to the table with specified width and height in percent.
      *
      * @param component     the UI element to add (e.g., Button, Label, Image)
-     * @param widthPercent  width in percent of the parent table (0.0f to 1.0f)
-     * @param heightPercent height in percent of the parent table (0.0f to 1.0f)
+     * @param widthPercent  width in percent of the parent table (0.0f to 100.0f)
+     * @param heightPercent height in percent of the parent table (0.0f to 100.0f)
      * @param <T>           type of the Actor
      */
     public <T extends Actor> void addComponent(T component, float widthPercent, float heightPercent) {
         table.add(component)
-                .width(percentWidth(widthPercent, table))
-                .height(percentHeight(heightPercent, table))
+                .width(percentWidth(widthPercent / 100, table))
+                .height(percentHeight(heightPercent / 100, table))
                 .padBottom(20);
         table.row();
     }

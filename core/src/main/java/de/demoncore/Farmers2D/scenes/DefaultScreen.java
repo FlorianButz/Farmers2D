@@ -61,7 +61,7 @@ public class DefaultScreen extends BaseScreen {
             @Override
             public void onEscapePressed() {
                 super.onEscapePressed();
-                Game.instance.switchScreens(2);
+                Game.instance.switchScreens("pause");
             }
 
             @Override

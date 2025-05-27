@@ -21,6 +21,7 @@ import de.demoncore.Farmers2D.scenes.utils.ShapeEntry;
 import de.demoncore.Farmers2D.scenes.utils.SpriteEntry;
 import de.demoncore.Farmers2D.utils.Logger;
 import de.demoncore.Farmers2D.utils.Resources;
+import de.demoncore.Farmers2D.utils.Translation;
 
 import java.util.ArrayList;
 
@@ -198,7 +199,7 @@ public class BaseScreen implements Screen {
         if(debugFont == null) return;
         sb.begin();
 
-        String interaction = "[E] Interact";
+        String interaction = Translation.get("action.interaction");
         float width = new GlyphLayout(debugFont, interaction).width;
         for (ShapeEntry entry : filledShapes){
             if(!(entry.getGameObject() instanceof InteractableObject)) continue;
