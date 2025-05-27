@@ -1,9 +1,10 @@
-package de.demoncore.Farmers2D;
+package de.demoncore.Farmers2D.logic;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import de.demoncore.Farmers2D.gameObjects.GameObject;
+import de.demoncore.Farmers2D.saveFiles.SaveManager;
 import de.demoncore.Farmers2D.scenes.BaseScreen;
 import de.demoncore.Farmers2D.scenes.DefaultScreen;
 import de.demoncore.Farmers2D.scenes.GUIScreen;
@@ -27,7 +28,6 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     InputMultiplexer multiplexer = new InputMultiplexer();
 
     public boolean isPaused = false;
-    public boolean isInDebug = false;
 
     public Game(){
         resources = new Resources();
@@ -47,6 +47,7 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
         screens.add(new PauseMenu());
 
         switchScreens(defaultScreen);
+        Settings.load();
     }
 
     @Override
@@ -76,6 +77,8 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     public void dispose() {
         super.dispose();
         getScreen().dispose();
+        SaveManager.saveAll();
+        Logger.logInfo("application closed");
     }
 
     /**

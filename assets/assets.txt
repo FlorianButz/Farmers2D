@@ -1,4 +1,5 @@
 .gitkeep
+config/settings.json
 fonts/0.ttf
 ui/font-list.fnt
 ui/font-subtitle.fnt

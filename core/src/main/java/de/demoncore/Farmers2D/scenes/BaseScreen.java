@@ -14,9 +14,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import de.demoncore.Farmers2D.Game;
 import de.demoncore.Farmers2D.gameObjects.GameObject;
 import de.demoncore.Farmers2D.gameObjects.InteractableObject;
+import de.demoncore.Farmers2D.logic.Settings;
 import de.demoncore.Farmers2D.scenes.utils.ShapeEntry;
 import de.demoncore.Farmers2D.scenes.utils.SpriteEntry;
 import de.demoncore.Farmers2D.utils.Logger;
@@ -312,7 +312,7 @@ public class BaseScreen implements Screen {
         drawLineShape();
         drawSprites();
         drawInteractableText();
-        if(Game.instance.isInDebug){
+        if(Settings.instance.debug){
             drawAllDebugShapes();
 
             drawDebugText();

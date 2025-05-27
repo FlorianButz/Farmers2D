@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import de.demoncore.Farmers2D.Game;
+import de.demoncore.Farmers2D.logic.Game;
 import de.demoncore.Farmers2D.utils.Logger;
 
 public class PauseMenu extends GUIScreen{

@@ -1,7 +1,7 @@
 package de.demoncore.Farmers2D.utils;
 
 import com.badlogic.gdx.math.Rectangle;
-import de.demoncore.Farmers2D.Game;
+import de.demoncore.Farmers2D.logic.Game;
 import de.demoncore.Farmers2D.gameObjects.GameObject;
 import de.demoncore.Farmers2D.utils.interfaces.Interactable;
 
