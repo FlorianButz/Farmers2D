@@ -11,7 +11,7 @@ import de.demoncore.Farmers2D.scenes.utils.Shapes;
  */
 public class GameObject {
 
-    private Shapes shapes;
+    protected Shapes shapes;
     public Vector2 pos;
     public Vector2 size;
     public Color color;

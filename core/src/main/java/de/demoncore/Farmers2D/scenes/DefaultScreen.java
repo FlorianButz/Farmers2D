@@ -7,11 +7,13 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import de.demoncore.Farmers2D.Game;
 import de.demoncore.Farmers2D.gameObjects.GameObject;
+import de.demoncore.Farmers2D.gameObjects.InteractableObject;
 import de.demoncore.Farmers2D.gameObjects.Player;
 import de.demoncore.Farmers2D.scenes.utils.Shapes;
 import de.demoncore.Farmers2D.utils.GameActionListener;
 import de.demoncore.Farmers2D.utils.KeyHandler;
 import de.demoncore.Farmers2D.utils.Logger;
+import de.demoncore.Farmers2D.utils.UtilityMethods;
 
 public class DefaultScreen extends BaseScreen {
 
@@ -34,6 +36,18 @@ public class DefaultScreen extends BaseScreen {
         cameraFollowObject = p;
         addFillShape(p);
 
+        InteractableObject iO = new InteractableObject(Shapes.Rectangle,
+                new Vector2(300f, 300f),
+                new Vector2(25, 25),
+                Color.DARK_GRAY,
+                75f,
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        Logger.logInfo("interacted Event");
+                    }
+                });
+        addFillShape(iO);
 
         tempObstacle();
 
@@ -48,6 +62,12 @@ public class DefaultScreen extends BaseScreen {
             public void onEscapePressed() {
                 super.onEscapePressed();
                 Game.instance.switchScreens(2);
+            }
+
+            @Override
+            public void onInteractionKeyPressed() {
+                super.onInteractionKeyPressed();
+                UtilityMethods.callInteractionOnObjects();
             }
         }, "DefaultScreen");
         super.show();

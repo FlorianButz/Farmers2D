@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -15,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.demoncore.Farmers2D.Game;
 import de.demoncore.Farmers2D.gameObjects.GameObject;
+import de.demoncore.Farmers2D.gameObjects.InteractableObject;
 import de.demoncore.Farmers2D.scenes.utils.ShapeEntry;
 import de.demoncore.Farmers2D.scenes.utils.SpriteEntry;
 import de.demoncore.Farmers2D.utils.Logger;
@@ -27,7 +29,6 @@ public class BaseScreen implements Screen {
     Vector2 windowSize = new Vector2(1200, 800);
     protected ShapeRenderer sr;
     protected SpriteBatch sb;
-    protected ShapeRenderer srDebug;
 
     protected OrthographicCamera camera;
     protected Viewport viewport;
@@ -124,7 +125,7 @@ public class BaseScreen implements Screen {
         GameObject obj = entry.getGameObject();
         if (obj != null && obj.isDistanceCulled) return;
 
-        srDebug.setColor(entry.getGameObject().collisionEnabled ? Color.LIME : Color.RED);
+        sr.setColor(entry.getGameObject().collisionEnabled ? Color.LIME : Color.RED);
 
         float padding = 2f;
         float posX = entry.getPos().x - padding;
@@ -134,13 +135,13 @@ public class BaseScreen implements Screen {
 
         switch (entry.getShape()) {
             case Rectangle:
-                srDebug.rect(posX, posY, sizeX, sizeY);
+                sr.rect(posX, posY, sizeX, sizeY);
                 break;
             case Oval:
-                srDebug.ellipse(posX, posY, sizeX ,sizeY);
+                sr.ellipse(posX, posY, sizeX ,sizeY);
                 break;
             case Point:
-                srDebug.point(posX, posY, 0);
+                sr.point(posX, posY, 0);
                 break;
             default:
                 throw new IllegalStateException("unknown Shape: " + entry.getShape());
@@ -148,14 +149,14 @@ public class BaseScreen implements Screen {
     }
 
     private void drawAllDebugShapes() {
-        srDebug.begin(ShapeType.Line);
+        sr.begin(ShapeType.Line);
         for (ShapeEntry entry : filledShapes) {
             drawDebug(entry);
         }
         for (ShapeEntry entry : lineShapes) {
             drawDebug(entry);
         }
-        srDebug.end();
+        sr.end();
     }
 
     private void drawDebugText() {
@@ -171,14 +172,51 @@ public class BaseScreen implements Screen {
 
         String className = obj.getClass().getSimpleName();
         Vector2 pos = entry.getPos();
-        if(debugFont == null && Resources.instance.initialized){
-            debugFont = Resources.getFontTTF(Resources.debugFont, 10);
-            Logger.logWarning("loaded debugFont");
-        }
         if(debugFont != null) {
             debugFont.setColor(entry.getGameObject().collisionEnabled ? Color.LIME : Color.RED);
             debugFont.draw(sb, className, pos.x, pos.y + entry.getSize().y + 12); // 12px über dem Shape
         }
+    }
+
+    private void drawInteractableRange() {
+        sr.begin(ShapeType.Line);
+        sr.setColor(Color.RED);
+        for (ShapeEntry entry : filledShapes){
+            if(!(entry.getGameObject() instanceof InteractableObject)) continue;
+            InteractableObject object = (InteractableObject) entry.getGameObject();
+            sr.circle(entry.getPos().x + entry.getSize().x / 2, entry.getPos().y + entry.getSize().y / 2, object.interactionRange);
+        }
+        for (ShapeEntry entry : lineShapes){
+            if(!(entry.getGameObject() instanceof InteractableObject)) continue;
+            InteractableObject object = (InteractableObject) entry.getGameObject();
+            sr.circle(entry.getPos().x + entry.getSize().x / 2, entry.getPos().y + entry.getSize().y / 2, object.interactionRange);
+        }
+        sr.end();
+    }
+
+    private void drawInteractableText() {
+        if(debugFont == null) return;
+        sb.begin();
+
+        String interaction = "[E] Interact";
+        float width = new GlyphLayout(debugFont, interaction).width;
+        for (ShapeEntry entry : filledShapes){
+            if(!(entry.getGameObject() instanceof InteractableObject)) continue;
+            InteractableObject object = (InteractableObject) entry.getGameObject();
+            if(!object.canInteract()) continue;
+            Vector2 pos = entry.getPos();
+            debugFont.setColor(Color.WHITE);
+            debugFont.draw(sb, interaction, pos.x + entry.getSize().y / 2 - width / 2, pos.y + entry.getSize().y + 12);
+        };
+        for (ShapeEntry entry : lineShapes) {
+            if(!(entry.getGameObject() instanceof InteractableObject)) continue;
+            InteractableObject object = (InteractableObject) entry.getGameObject();
+            if(!object.canInteract()) continue;
+            Vector2 pos = entry.getPos();
+            debugFont.setColor(Color.WHITE);
+            debugFont.draw(sb, interaction, pos.x + entry.getSize().y / 2 - width / 2, pos.y + entry.getSize().y + 12);
+        }
+        sb.end();
     }
 
     /**
@@ -231,7 +269,6 @@ public class BaseScreen implements Screen {
     public void initialize(){
         sr = new ShapeRenderer();
         sb = new SpriteBatch();
-        srDebug = new ShapeRenderer();
 
         camera = new OrthographicCamera();
         viewport = new FitViewport(windowSize.x, windowSize.y, camera);
@@ -258,7 +295,6 @@ public class BaseScreen implements Screen {
             camera.update();
             sr.setProjectionMatrix(camera.combined);
             sb.setProjectionMatrix(camera.combined);
-            srDebug.setProjectionMatrix(camera.combined);
         }
         Rectangle viewportRect = calcViewport();
 
@@ -275,9 +311,17 @@ public class BaseScreen implements Screen {
         drawFilledShape();
         drawLineShape();
         drawSprites();
+        drawInteractableText();
         if(Game.instance.isInDebug){
             drawAllDebugShapes();
+
             drawDebugText();
+            drawInteractableRange();
+        }
+
+        if(debugFont == null && Resources.instance.initialized){
+            debugFont = Resources.getFontTTF(Resources.debugFont, 10);
+            Logger.logWarning("loaded debugFont");
         }
     }
 

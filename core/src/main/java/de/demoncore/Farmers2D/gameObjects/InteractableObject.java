@@ -1,0 +1,46 @@
+package de.demoncore.Farmers2D.gameObjects;
+
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Vector2;
+import de.demoncore.Farmers2D.scenes.utils.Shapes;
+import de.demoncore.Farmers2D.utils.Logger;
+import de.demoncore.Farmers2D.utils.interfaces.Interactable;
+
+public class InteractableObject extends GameObject implements Interactable {
+
+    public Runnable event;
+    public float interactionRange;
+
+    /**
+     * Creates a new InteractableObject instance.
+     *
+     * @param shapes the shape type of the object (e.g. Rectangle, Oval, etc.)
+     * @param pos    the position of the object in world coordinates
+     * @param size   the size of the object
+     * @param color  the color used for rendering the object
+     * @param interactionRange  the range to interact with the object
+     * @param event  the action executing on interaction
+     */
+    public InteractableObject(Shapes shapes, Vector2 pos, Vector2 size, Color color, float interactionRange, Runnable event) {
+        super(shapes, pos, size, color);
+        this.interactionRange = interactionRange;
+        this.event = event;
+    }
+
+    @Override
+    public void onInteraction(){
+        event.run();
+        Logger.logInfo("interacted->"+this);
+    };
+
+    /**
+     * Checks if the Player is in range of the Object for interaction
+     *
+     * @return true when player is in range
+     */
+    @Override
+    public boolean canInteract(){
+        Vector2 player = Player.instance.pos.cpy().add(Player.instance.size.cpy().scl(0.5f));
+        return player.dst(pos.cpy().add(size.cpy().scl(0.5f))) <= interactionRange;
+    }
+}
