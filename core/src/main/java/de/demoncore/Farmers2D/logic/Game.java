@@ -26,7 +26,7 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     private HashMap<String, Screen> screens = new HashMap<>();
     private String defaultScreen = "main";
 
-    InputMultiplexer multiplexer = new InputMultiplexer();
+    public InputMultiplexer multiplexer = new InputMultiplexer();
 
     public boolean isPaused = false;
 

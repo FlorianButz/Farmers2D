@@ -16,7 +16,7 @@ import java.util.Iterator;
 public class QuestManager {
     public static QuestManager instance;
 
-    public int maxQuestCapacity = 3;
+    public int maxQuestCapacity = 30;
     public ArrayList<Quest> currentQuests = new ArrayList<>();
 
     public int lastId = -1;

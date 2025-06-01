@@ -38,6 +38,8 @@ public class KeyHandler extends InputAdapter {
                 listener.onInteractionKeyPressed();
             if (keycode == Input.Keys.SPACE)
                 listener.onSpaceKeyPressed();
+            if (keycode == Input.Keys.TAB)
+                listener.onTabPressed();
         }
 
         if (keycode == Input.Keys.A) {
