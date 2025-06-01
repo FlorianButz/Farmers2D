@@ -4,7 +4,9 @@ import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -18,6 +20,8 @@ public class Resources {
     public static FileHandle debugFont;
     public static Skin uiSkin;
 
+    public static BitmapFont pixelFont;
+
     public Resources(){
         instance = this;
     }
@@ -26,6 +30,7 @@ public class Resources {
         // Font laden
         debugFont = Gdx.files.internal("fonts/0.ttf");
         uiSkin = new Skin(Gdx.files.internal("ui/uiskin.json"));
+
         Logger.logInfo("Resources loaded");
         initialized = true;
     }

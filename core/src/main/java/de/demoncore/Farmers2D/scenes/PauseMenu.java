@@ -1,14 +1,19 @@
 package de.demoncore.Farmers2D.scenes;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import de.demoncore.Farmers2D.logic.Game;
+import de.demoncore.Farmers2D.ui.DTextButton;
 import de.demoncore.Farmers2D.utils.Logger;
 import de.demoncore.Farmers2D.utils.Resources;
 import de.demoncore.Farmers2D.utils.Translation;
@@ -40,7 +45,7 @@ public class PauseMenu extends GUIScreen{
         super.show();
         Game.instance.isPaused = true;
 
-        TextButton backToGame = new TextButton(Translation.get("component.button.btg"), Resources.uiSkin);
+        DTextButton backToGame = new DTextButton(Translation.get("component.button.btg"));
         backToGame.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -48,11 +53,9 @@ public class PauseMenu extends GUIScreen{
                 super.clicked(event, x, y);
             }
         });
-        //backToGame.getLabel().setFontScale(1.5f);   //<-disabled lässt Font verschwimmen
         addComponent(backToGame, 30f, 7.5f);
 
-
-        TextButton settings = new TextButton(Translation.get("component.button.settings"), Resources.uiSkin);
+        DTextButton settings = new DTextButton(Translation.get("component.button.settings"));
         settings.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -60,7 +63,6 @@ public class PauseMenu extends GUIScreen{
                 super.clicked(event, x, y);
             }
         });
-        //settings.getLabel().setFontScale(1.5f);   //<-disabled lässt Font verschwimmen
         addComponent(settings, 30f, 7.5f);
     }
 

@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import de.demoncore.Farmers2D.logic.Game;
+import de.demoncore.Farmers2D.ui.DTextButton;
 import de.demoncore.Farmers2D.utils.Logger;
 import de.demoncore.Farmers2D.utils.Resources;
 import de.demoncore.Farmers2D.utils.Translation;
@@ -21,7 +22,7 @@ public class MainMenu extends GUIScreen{
     public void show() {
         super.show();
 
-        TextButton play = new TextButton(Translation.get("component.button.play"), Resources.uiSkin);
+        DTextButton play = new DTextButton(Translation.get("component.button.play"));
         play.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -32,7 +33,7 @@ public class MainMenu extends GUIScreen{
         });
         addComponent(play, 30f, 7.5f);
 
-        TextButton settings = new TextButton(Translation.get("component.button.settings"), Resources.uiSkin);
+        DTextButton settings = new DTextButton(Translation.get("component.button.settings"));
         settings.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {

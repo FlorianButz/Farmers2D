@@ -1,10 +1,10 @@
 {
 com.badlogic.gdx.graphics.g2d.BitmapFont: {
   default: {
-    file: font.fnt
+    file: pixel.fnt
   }
   font: {
-    file: font.fnt
+    file: pixel.fnt
   }
   list: {
     file: font-list.fnt
