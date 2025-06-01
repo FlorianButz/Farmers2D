@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
 import de.demoncore.Farmers2D.logic.Settings;
+import de.demoncore.Farmers2D.questSystem.QuestManager;
 import de.demoncore.Farmers2D.utils.Logger;
 
 public class SaveManager {
@@ -27,9 +28,7 @@ public class SaveManager {
 
     public static void saveAll(){
         saveToFile(Settings.instance, SaveFile.SETTINGS);
-
-
-
+        saveToFile(QuestManager.instance, SaveFile.QUESTMANAGER);
     }
 
 

@@ -1,6 +1,7 @@
 .gitkeep
 config/settings.json
 fonts/0.ttf
+game/questManager.json
 ui/font-list.fnt
 ui/font-subtitle.fnt
 ui/font-window.fnt

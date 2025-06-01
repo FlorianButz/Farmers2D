@@ -4,12 +4,12 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 
 public class SpriteEntry {
-    private Vector2 v;
+    private Vector2 pos;
     private Sprite s;
 
-    public SpriteEntry(Sprite s, Vector2 v){
+    public SpriteEntry(Sprite s, Vector2 pos){
         this.s = s;
-        this.v = v;
+        this.pos = pos;
     }
 
     public Sprite getSprite() {
@@ -17,6 +17,6 @@ public class SpriteEntry {
     }
 
     public Vector2 getVector() {
-        return v;
+        return pos;
     }
 }

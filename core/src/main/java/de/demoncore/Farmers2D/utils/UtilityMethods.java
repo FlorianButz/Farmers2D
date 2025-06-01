@@ -1,6 +1,7 @@
 package de.demoncore.Farmers2D.utils;
 
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import de.demoncore.Farmers2D.logic.Game;
 import de.demoncore.Farmers2D.gameObjects.GameObject;
 import de.demoncore.Farmers2D.utils.interfaces.Interactable;
@@ -38,6 +39,11 @@ public class UtilityMethods {
             if(!intObj.canInteract()) continue;
             intObj.onInteraction();
         }
+    }
+
+    public static String formatVector(Vector2 v, int decimalPlaces){
+        String format = "(%."+ decimalPlaces + "f, %." + decimalPlaces + "f)";
+        return  String.format(format, v.x, v.y);
     }
 
 

@@ -4,6 +4,7 @@ import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import de.demoncore.Farmers2D.gameObjects.GameObject;
+import de.demoncore.Farmers2D.questSystem.QuestManager;
 import de.demoncore.Farmers2D.saveFiles.SaveManager;
 import de.demoncore.Farmers2D.scenes.*;
 import de.demoncore.Farmers2D.utils.KeyHandler;
@@ -21,6 +22,7 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     KeyHandler keyHandler = new KeyHandler();
     Resources resources;
     Stage currentStage;
+    QuestManager questManager;
     private HashMap<String, Screen> screens = new HashMap<>();
     private String defaultScreen = "main";
 
@@ -30,6 +32,7 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
 
     public Game(){
         resources = new Resources();
+        questManager = new QuestManager();
         instance = this;
     }
 
@@ -46,6 +49,8 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
 
         switchScreens(defaultScreen);
         Settings.load();
+        QuestManager.instance.load();
+        Logger.logInfo("quests->"+QuestManager.instance.currentQuests.size());
     }
 
     @Override
@@ -59,6 +64,7 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
         if(keyHandler.isAnyKeyPressed){
             keyHandler.update();
         }
+        QuestManager.instance.updateAll();
     }
 
     @Override

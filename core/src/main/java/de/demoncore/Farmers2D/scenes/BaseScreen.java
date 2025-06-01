@@ -16,12 +16,14 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.demoncore.Farmers2D.gameObjects.GameObject;
 import de.demoncore.Farmers2D.gameObjects.InteractableObject;
+import de.demoncore.Farmers2D.itemSystem.Item;
 import de.demoncore.Farmers2D.logic.Settings;
 import de.demoncore.Farmers2D.scenes.utils.ShapeEntry;
 import de.demoncore.Farmers2D.scenes.utils.SpriteEntry;
 import de.demoncore.Farmers2D.utils.Logger;
 import de.demoncore.Farmers2D.utils.Resources;
 import de.demoncore.Farmers2D.utils.Translation;
+import de.demoncore.Farmers2D.utils.UtilityMethods;
 
 import java.util.ArrayList;
 
@@ -176,6 +178,7 @@ public class BaseScreen implements Screen {
         if(debugFont != null) {
             debugFont.setColor(entry.getGameObject().collisionEnabled ? Color.LIME : Color.RED);
             debugFont.draw(sb, className, pos.x, pos.y + entry.getSize().y + 12); // 12px über dem Shape
+            debugFont.draw(sb, UtilityMethods.formatVector(pos, 2), pos.x, pos.y + entry.getSize().y + 24);
         }
     }
 

@@ -9,11 +9,14 @@ import de.demoncore.Farmers2D.logic.Game;
 import de.demoncore.Farmers2D.gameObjects.GameObject;
 import de.demoncore.Farmers2D.gameObjects.InteractableObject;
 import de.demoncore.Farmers2D.gameObjects.Player;
+import de.demoncore.Farmers2D.questSystem.QuestManager;
+import de.demoncore.Farmers2D.questSystem.quests.Quest;
 import de.demoncore.Farmers2D.scenes.utils.Shapes;
 import de.demoncore.Farmers2D.utils.GameActionListener;
 import de.demoncore.Farmers2D.utils.KeyHandler;
 import de.demoncore.Farmers2D.utils.Logger;
 import de.demoncore.Farmers2D.utils.UtilityMethods;
+import de.demoncore.Farmers2D.utils.enums.QuestType;
 
 public class DefaultScreen extends BaseScreen {
 
@@ -48,6 +51,29 @@ public class DefaultScreen extends BaseScreen {
                     }
                 });
         addFillShape(iO);
+
+        InteractableObject QuestBoard = new InteractableObject(Shapes.Oval,
+                new Vector2(500, 500),
+                new Vector2(25, 25),
+                Color.CYAN,
+                75f,
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        QuestManager.instance.addNewQuest(QuestManager.instance.getNewQuest(QuestType.POSITION,
+                                "Test",
+                                "Just A test",
+                                0,
+                                1,
+                                null,
+                                new Vector2(1000, 1000) ), false);
+
+                        for(Quest q : QuestManager.instance.currentQuests){
+                            Logger.logInfo(q.toString());
+                        }
+                    }
+                });
+        addFillShape(QuestBoard);
 
         tempObstacle();
 
