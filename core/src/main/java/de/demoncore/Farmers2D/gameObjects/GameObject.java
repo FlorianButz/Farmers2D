@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import de.demoncore.Farmers2D.logic.Game;
-import de.demoncore.Farmers2D.scenes.utils.ShapeEntry;
 import de.demoncore.Farmers2D.scenes.utils.Shapes;
 import de.demoncore.Farmers2D.utils.RenderListener;
 import de.demoncore.Farmers2D.utils.UtilityMethods;
@@ -97,15 +96,6 @@ public class GameObject {
     public Rectangle getBoundingBox() {
         boundingBox.set(pos.x, pos.y, size.x, size.y);
         return boundingBox;
-    }
-
-    /**
-     * Converts the game object to a ShapeEntry for rendering.
-     *
-     * @return a ShapeEntry with this object's properties
-     */
-    public ShapeEntry getShapeEntry(){
-        return new ShapeEntry(shapes, pos, size, color, this);
     }
 
     /**

@@ -3,7 +3,6 @@ package de.demoncore.Farmers2D.scenes;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.*;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -18,8 +17,6 @@ import de.demoncore.Farmers2D.gameObjects.GameObject;
 import de.demoncore.Farmers2D.gameObjects.InteractableObject;
 import de.demoncore.Farmers2D.logic.Game;
 import de.demoncore.Farmers2D.logic.Settings;
-import de.demoncore.Farmers2D.scenes.utils.ShapeEntry;
-import de.demoncore.Farmers2D.scenes.utils.SpriteEntry;
 import de.demoncore.Farmers2D.utils.*;
 
 import java.util.ArrayList;
@@ -34,10 +31,6 @@ public class BaseScreen implements Screen {
     protected OrthographicCamera camera;
     protected Viewport viewport;
     protected GameObject cameraFollowObject;
-
-    ArrayList<ShapeEntry> filledShapes = new ArrayList<>();
-    ArrayList<ShapeEntry> lineShapes = new ArrayList<>();
-    ArrayList<SpriteEntry> sprites = new ArrayList<>();
 
     public ArrayList<GameObject> screenObjects = new ArrayList<>();
 
