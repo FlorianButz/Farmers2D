@@ -7,7 +7,7 @@ import de.demoncore.Farmers2D.utils.enums.Language;
 public class Settings {
     public static Settings instance = new Settings();
 
-    public boolean debug = false;
+    public boolean debug = true;
     public Language currentLanguage = Language.ENGLISH;
 
     public Settings() {}

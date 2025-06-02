@@ -1,10 +1,17 @@
 package de.demoncore.Farmers2D.gameObjects;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import de.demoncore.Farmers2D.logic.Game;
 import de.demoncore.Farmers2D.scenes.utils.ShapeEntry;
 import de.demoncore.Farmers2D.scenes.utils.Shapes;
+import de.demoncore.Farmers2D.utils.RenderListener;
+import de.demoncore.Farmers2D.utils.UtilityMethods;
+
+import static de.demoncore.Farmers2D.utils.Resources.debugFont;
 
 /**
  * Represents a basic game object with position, size, color, shape and simple physics.
@@ -18,6 +25,8 @@ public class GameObject {
     public Vector2 velocity = Vector2.Zero.cpy();
     public boolean isDistanceCulled = false;
     private final Rectangle boundingBox = new Rectangle();
+
+    private RenderListener rListener;
 
     public boolean collisionEnabled = true;
 
@@ -34,6 +43,50 @@ public class GameObject {
         this.pos = pos;
         this.size = size;
         this.color = color;
+
+        rListener = new RenderListener(){
+            @Override
+            public void onRenderShapes(ShapeRenderer srLine, ShapeRenderer srFilled) {
+                drawShapes(srLine, srFilled);
+            }
+
+            @Override
+            public void onRenderBatch(SpriteBatch sb) {
+                drawBatch(sb);
+            }
+
+            @Override
+            public void onRenderDebug(ShapeRenderer sr, SpriteBatch sb){
+                drawDebug(sb, sr);
+            }
+
+        };
+
+        Game.instance.addRenderListener(rListener);
+    }
+
+    public void drawDebug(SpriteBatch sb, ShapeRenderer sr){
+        if(!shouldDraw()) return;
+
+        String className = getClass().getSimpleName();
+        if(debugFont != null) {
+            debugFont.setColor(collisionEnabled ? Color.LIME : Color.RED);
+            debugFont.draw(sb, className, pos.x - size.x / 2, pos.y + size.y + 12); // 12px über dem Shape
+            debugFont.draw(sb, UtilityMethods.formatVector(pos, 2), pos.x - size.x / 2, pos.y + size.y + 24);
+        }
+
+    }
+
+    public void drawShapes(ShapeRenderer srLine, ShapeRenderer srFilled) {
+        if(!shouldDraw()) return;
+        srFilled.setColor(color);
+        srFilled.rect(pos.x, pos.y, size.x, size.y);
+    }
+
+    public void drawBatch(SpriteBatch sb) {}
+
+    protected boolean shouldDraw(){
+        return !isDistanceCulled && Game.instance.getScreen().screenObjects.contains(this);
     }
 
     /**

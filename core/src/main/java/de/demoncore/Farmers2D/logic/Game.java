@@ -1,16 +1,15 @@
 package de.demoncore.Farmers2D.logic;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.TimeUtils;
 import de.demoncore.Farmers2D.gameObjects.GameObject;
 import de.demoncore.Farmers2D.questSystem.QuestManager;
 import de.demoncore.Farmers2D.saveFiles.SaveManager;
 import de.demoncore.Farmers2D.scenes.*;
-import de.demoncore.Farmers2D.utils.KeyHandler;
-import de.demoncore.Farmers2D.utils.Logger;
-import de.demoncore.Farmers2D.utils.Resources;
-import de.demoncore.Farmers2D.utils.Translation;
+import de.demoncore.Farmers2D.utils.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,38 +19,25 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     public static Game instance;
 
     KeyHandler keyHandler = new KeyHandler();
-    Resources resources;
+
     Stage currentStage;
     QuestManager questManager;
     private HashMap<String, Screen> screens = new HashMap<>();
     private String defaultScreen = "main";
 
     public InputMultiplexer multiplexer = new InputMultiplexer();
+    public ArrayList<RenderListener> rListeners = new ArrayList<>();
 
     public boolean isPaused = false;
+    boolean finishedLoading;
 
     public Game(){
-        resources = new Resources();
         questManager = new QuestManager();
         instance = this;
     }
 
     @Override
-    public void create() {
-        Translation translation = new Translation();
-        translation.init();
-
-        multiplexer.addProcessor(keyHandler);
-        if(currentStage != null) multiplexer.addProcessor(currentStage);
-
-        Gdx.input.setInputProcessor(multiplexer);
-        Logger.logInfo("Setting screen to DefaultScene");
-
-        switchScreens(defaultScreen);
-        Settings.load();
-        QuestManager.instance.load();
-        Logger.logInfo("quests->"+QuestManager.instance.currentQuests.size());
-    }
+    public void create() {}
 
     @Override
     public void resize(final int width, final int height) {
@@ -60,6 +46,17 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
 
     @Override
     public void render() {
+        if (!finishedLoading) {
+            if (Resources.instance == null) {
+                Resources res = new Resources();
+                res.init();
+            }
+
+            if (Resources.instance.initialized) {
+                finishLoading();
+            }
+            return;
+        }
         super.render();
         if(keyHandler.isAnyKeyPressed){
             keyHandler.update();
@@ -117,13 +114,6 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
      * @param screen index of screen to switch to
      */
     public void switchScreens(String screen){
-        if(!Resources.instance.initialized){
-            Resources.instance.init();
-            screens.put("main", new MainMenu());
-            screens.put("default", new DefaultScreen());
-            screens.put("pause", new PauseMenu());
-        }
-
         if(screens.get(screen) instanceof PauseMenu){
             PauseMenu pM = (PauseMenu) screens.get(screen);
             BaseScreen bS = (BaseScreen) getScreen();
@@ -136,4 +126,39 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
 
         setScreen(screens.get(screen));
     }
+
+    public void addRenderListener(RenderListener rListener) {
+        rListeners.add(rListener);
+    }
+
+    @Override
+    public BaseScreen getScreen() {
+        return (BaseScreen) super.getScreen();
+    }
+
+    public void finishLoading(){
+        Translation translation = new Translation();
+        translation.init();
+
+        initScreens();
+
+        multiplexer.addProcessor(keyHandler);
+        if(currentStage != null) multiplexer.addProcessor(currentStage);
+
+        Gdx.input.setInputProcessor(multiplexer);
+        Logger.logInfo("Setting screen to DefaultScene");
+
+        switchScreens(defaultScreen);
+        Settings.load();
+        QuestManager.instance.load();
+        Logger.logInfo("quests->"+QuestManager.instance.currentQuests.size());
+        finishedLoading = true;
+    }
+
+    public void initScreens(){
+        screens.put("main", new MainMenu());
+        screens.put("default", new DefaultScreen());
+        screens.put("pause", new PauseMenu());
+    }
+
 }

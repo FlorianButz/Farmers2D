@@ -22,6 +22,7 @@ public class PositionQuest extends Quest{
     @Override
     public void updateProgress() {
         if(isCompleted) return;
+        if(Player.instance == null) return;
         float dist = Player.instance.pos.dst(position);
         if(dist <= 50){
             triggerReward();

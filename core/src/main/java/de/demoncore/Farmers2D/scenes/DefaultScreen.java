@@ -52,7 +52,7 @@ public class DefaultScreen extends BaseScreen {
         Player p = new Player(new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2), new Vector2(25, 25));
         p.color = Color.GRAY;
         cameraFollowObject = p;
-        addFillShape(p);
+        addObject(p);
 
         InteractableObject iO = new InteractableObject(Shapes.Rectangle,
                 new Vector2(300f, 300f),
@@ -65,7 +65,7 @@ public class DefaultScreen extends BaseScreen {
                         Logger.logInfo("interacted Event");
                     }
                 });
-        addFillShape(iO);
+        addObject(iO);
 
         InteractableObject QuestBoard = new InteractableObject(Shapes.Oval,
                 new Vector2(500, 500),
@@ -88,7 +88,7 @@ public class DefaultScreen extends BaseScreen {
                         }
                     }
                 });
-        addFillShape(QuestBoard);
+        addObject(QuestBoard);
 
         tempObstacle();
 
@@ -134,10 +134,10 @@ public class DefaultScreen extends BaseScreen {
 
     @Override
     public void render(float delta) {
-        sr.begin(ShapeRenderer.ShapeType.Filled);
-        sr.setColor(background);
-        sr.rect(0,0,windowSize.x + 20, windowSize.y + 20);
-        sr.end();
+        srFilled.begin(ShapeRenderer.ShapeType.Filled);
+        srFilled.setColor(background);
+        srFilled.rect(0,0,windowSize.x + 20, windowSize.y + 20);
+        srFilled.end();
         super.render(delta);
 
         stage.act(delta);
@@ -154,7 +154,7 @@ public class DefaultScreen extends BaseScreen {
                     new Vector2(MathUtils.random(-2000, 2000), MathUtils.random(-2000, 2000)),
                     new Vector2(30, 30),
                     Color.WHITE);
-            addFillShape(g);
+            addObject(g);
         }
     }
 
