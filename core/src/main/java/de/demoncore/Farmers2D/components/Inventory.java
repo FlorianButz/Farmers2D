@@ -6,6 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import de.demoncore.Farmers2D.logic.Game;
 import de.demoncore.Farmers2D.questSystem.QuestManager;
 import de.demoncore.Farmers2D.questSystem.quests.Quest;
+import de.demoncore.Farmers2D.utils.GameActionListener;
+import de.demoncore.Farmers2D.utils.KeyHandler;
 import de.demoncore.Farmers2D.utils.Logger;
 
 import java.util.ArrayList;
@@ -154,6 +156,5 @@ public class Inventory extends Window {
 
         content3.add(scrollWrapper).expand().fill().pad(5);
     }
-
 
 }

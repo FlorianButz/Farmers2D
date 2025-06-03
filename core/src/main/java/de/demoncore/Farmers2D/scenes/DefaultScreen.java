@@ -15,7 +15,6 @@ import de.demoncore.Farmers2D.gameObjects.InteractableObject;
 import de.demoncore.Farmers2D.gameObjects.Player;
 import de.demoncore.Farmers2D.questSystem.QuestManager;
 import de.demoncore.Farmers2D.questSystem.quests.Quest;
-import de.demoncore.Farmers2D.scenes.utils.Shapes;
 import de.demoncore.Farmers2D.utils.GameActionListener;
 import de.demoncore.Farmers2D.utils.KeyHandler;
 import de.demoncore.Farmers2D.utils.Logger;
@@ -32,7 +31,7 @@ public class DefaultScreen extends BaseScreen {
 
     private Stage stage;
     private Table table;
-    private Inventory inv;
+    public Inventory inv;
 
     /**
      * Constructs the default screen and logs its creation.
@@ -54,8 +53,7 @@ public class DefaultScreen extends BaseScreen {
         cameraFollowObject = p;
         addObject(p);
 
-        InteractableObject iO = new InteractableObject(Shapes.Rectangle,
-                new Vector2(300f, 300f),
+        InteractableObject iO = new InteractableObject(new Vector2(300f, 300f),
                 new Vector2(25, 25),
                 Color.DARK_GRAY,
                 75f,
@@ -67,7 +65,7 @@ public class DefaultScreen extends BaseScreen {
                 });
         addObject(iO);
 
-        InteractableObject QuestBoard = new InteractableObject(Shapes.Oval,
+        InteractableObject QuestBoard = new InteractableObject(
                 new Vector2(500, 500),
                 new Vector2(25, 25),
                 Color.CYAN,
@@ -108,8 +106,12 @@ public class DefaultScreen extends BaseScreen {
         KeyHandler.instance.add(listener = new GameActionListener(){
             @Override
             public void onEscapePressed() {
-                super.onEscapePressed();
+                if(inv.isVisible()) {
+                    inv.hide();
+                    return;
+                }
                 Game.instance.switchScreens("pause");
+                super.onEscapePressed();
             }
 
             @Override
@@ -150,8 +152,7 @@ public class DefaultScreen extends BaseScreen {
      */
     public void tempObstacle(){
         for (int i = 0; i < 200; i++) {
-            GameObject g = new GameObject(Shapes.Rectangle,
-                    new Vector2(MathUtils.random(-2000, 2000), MathUtils.random(-2000, 2000)),
+            GameObject g = new GameObject(new Vector2(MathUtils.random(-2000, 2000), MathUtils.random(-2000, 2000)),
                     new Vector2(30, 30),
                     Color.WHITE);
             addObject(g);

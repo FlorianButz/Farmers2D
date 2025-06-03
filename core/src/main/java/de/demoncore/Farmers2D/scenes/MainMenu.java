@@ -7,9 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import de.demoncore.Farmers2D.logic.Game;
 import de.demoncore.Farmers2D.ui.DTextButton;
-import de.demoncore.Farmers2D.utils.Logger;
-import de.demoncore.Farmers2D.utils.Resources;
-import de.demoncore.Farmers2D.utils.Translation;
+import de.demoncore.Farmers2D.utils.*;
 
 public class MainMenu extends GUIScreen{
 
@@ -42,7 +40,5 @@ public class MainMenu extends GUIScreen{
             }
         });
         addComponent(settings, 30f, 7.5f);
-
-
     }
 }

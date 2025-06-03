@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import de.demoncore.Farmers2D.logic.Game;
-import de.demoncore.Farmers2D.scenes.utils.Shapes;
 import de.demoncore.Farmers2D.utils.RenderListener;
 import de.demoncore.Farmers2D.utils.UtilityMethods;
 
@@ -17,7 +16,6 @@ import static de.demoncore.Farmers2D.utils.Resources.debugFont;
  */
 public class GameObject {
 
-    protected Shapes shapes;
     public Vector2 pos;
     public Vector2 size;
     public Color color;
@@ -37,8 +35,7 @@ public class GameObject {
      * @param size the size of the object
      * @param color the color used for rendering the object
      */
-    public GameObject(Shapes shapes, Vector2 pos, Vector2 size, Color color){
-        this.shapes = shapes;
+    public GameObject(Vector2 pos, Vector2 size, Color color){
         this.pos = pos;
         this.size = size;
         this.color = color;

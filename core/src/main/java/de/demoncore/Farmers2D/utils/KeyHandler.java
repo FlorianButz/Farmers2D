@@ -52,6 +52,18 @@ public class KeyHandler extends InputAdapter {
             playerInput.sub(new Vector2(0, 1));
         }
 
+        if(keycode == Input.Keys.NUM_1){
+
+        }else if(keycode == Input.Keys.NUM_2){
+            Logger.logInfo("2");
+        }else if(keycode == Input.Keys.NUM_3){
+            Logger.logInfo("3");
+        }else if(keycode == Input.Keys.NUM_4){
+            Logger.logInfo("4");
+        }else if(keycode == Input.Keys.NUM_5){
+            Logger.logInfo("5");
+        }else
+
         isAnyKeyPressed = pressedKeys.size() != 0;
         if (temp.dst(playerInput) != 0) {
             update();
@@ -90,7 +102,7 @@ public class KeyHandler extends InputAdapter {
      */
     public void add(GameActionListener gameActionListener, String name) {
         listeners.add(gameActionListener);
-        Logger.logInfo("added new Listener (" + name + ") newSize->" + listeners.size());
+        //Logger.logInfo("added new Listener (" + name + ") newSize->" + listeners.size());
     }
 
     /**
@@ -100,7 +112,7 @@ public class KeyHandler extends InputAdapter {
      */
     public void remove(GameActionListener listener, String name) {
         listeners.remove(listener);
-        Logger.logInfo("removed listener (" + name + ") newSize->" + listeners.size());
+        //Logger.logInfo("removed listener (" + name + ") newSize->" + listeners.size());
     }
 
     /**

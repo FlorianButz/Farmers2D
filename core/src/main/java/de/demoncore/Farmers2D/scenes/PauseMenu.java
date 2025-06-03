@@ -14,11 +14,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import de.demoncore.Farmers2D.logic.Game;
 import de.demoncore.Farmers2D.ui.DTextButton;
-import de.demoncore.Farmers2D.utils.Logger;
-import de.demoncore.Farmers2D.utils.Resources;
-import de.demoncore.Farmers2D.utils.Translation;
+import de.demoncore.Farmers2D.utils.*;
 
 public class PauseMenu extends GUIScreen{
+
+    private GameActionListener listener;
 
     private TextureRegion backgroundRegion;
     private Image backgroundImage;
@@ -44,6 +44,14 @@ public class PauseMenu extends GUIScreen{
     public void show() {
         super.show();
         Game.instance.isPaused = true;
+
+        KeyHandler.instance.add(listener = new GameActionListener() {
+            @Override
+            public void onEscapePressed() {
+                super.onEscapePressed();
+                Game.instance.switchScreenBack();
+            }
+        }, "MainMenu");
 
         DTextButton backToGame = new DTextButton(Translation.get("component.button.btg"));
         backToGame.addListener(new ClickListener(){
@@ -100,5 +108,6 @@ public class PauseMenu extends GUIScreen{
     public void hide() {
         super.hide();
         Game.instance.isPaused = false;
+        KeyHandler.instance.remove(listener, "MainMenu");
     }
 }

@@ -3,7 +3,6 @@ package de.demoncore.Farmers2D.gameObjects;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.*;
 import de.demoncore.Farmers2D.logic.Game;
-import de.demoncore.Farmers2D.scenes.utils.Shapes;
 import de.demoncore.Farmers2D.utils.UtilityMethods;
 
 import java.util.ArrayList;
@@ -17,8 +16,8 @@ public class RigidBody extends GameObject {
     private Vector2 lastPosition;
     private static final float VELOCITY_THRESHOLD = 0.01f;
 
-    public RigidBody(Shapes shapes, Vector2 pos, Vector2 size, Color color) {
-        super(shapes, pos, size, color);
+    public RigidBody(Vector2 pos, Vector2 size, Color color) {
+        super(pos, size, color);
     }
 
     private void moveWithCollision(Vector2 moveVector) {
@@ -33,7 +32,6 @@ public class RigidBody extends GameObject {
 
     private GameObject getCollidingObject() {
         List<GameObject> objs = new ArrayList<>(Game.instance.getScreenObjects());
-
         Rectangle thisObj = getBoundingBox();
 
         for (GameObject g : objs) {
