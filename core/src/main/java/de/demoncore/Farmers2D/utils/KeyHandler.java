@@ -3,7 +3,9 @@ package de.demoncore.Farmers2D.utils;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.Vector2;
-import de.demoncore.Farmers2D.gameObjects.Player;
+import de.demoncore.Farmers2D.itemSystem.Item;
+import de.demoncore.Farmers2D.logic.Game;
+import de.demoncore.Farmers2D.logic.GameState;
 
 import java.util.ArrayList;
 
@@ -53,16 +55,16 @@ public class KeyHandler extends InputAdapter {
         }
 
         if(keycode == Input.Keys.NUM_1){
-
+            Game.instance.state.addItem(new Item(0, 1));
         }else if(keycode == Input.Keys.NUM_2){
-            Logger.logInfo("2");
+            Game.instance.state.addItem(new Item(1, 1));
         }else if(keycode == Input.Keys.NUM_3){
-            Logger.logInfo("3");
+            Game.instance.state.addItem(new Item(2, 1));
         }else if(keycode == Input.Keys.NUM_4){
-            Logger.logInfo("4");
+            Game.instance.state.addItem(new Item(3, 1));
         }else if(keycode == Input.Keys.NUM_5){
-            Logger.logInfo("5");
-        }else
+            Game.instance.state.addItem(new Item(4, 1));
+        }
 
         isAnyKeyPressed = pressedKeys.size() != 0;
         if (temp.dst(playerInput) != 0) {
@@ -102,7 +104,7 @@ public class KeyHandler extends InputAdapter {
      */
     public void add(GameActionListener gameActionListener, String name) {
         listeners.add(gameActionListener);
-        //Logger.logInfo("added new Listener (" + name + ") newSize->" + listeners.size());
+        Logger.logInfo("added new Listener (" + name + ") newSize->" + listeners.size());
     }
 
     /**
@@ -123,6 +125,12 @@ public class KeyHandler extends InputAdapter {
         ArrayList<GameActionListener> l = new ArrayList<>(listeners);
         for (GameActionListener g : l) {
             g.onPlayerMovement(playerInput.cpy());
+        }
+    }
+
+    public void triggerOnItemCollect(Item item){
+        for(GameActionListener gL : new ArrayList<>(listeners)){
+            gL.onItemCollect(item);
         }
     }
 

@@ -23,7 +23,7 @@ public class GameObject {
     public boolean isDistanceCulled = false;
     private final Rectangle boundingBox = new Rectangle();
 
-    private RenderListener rListener;
+    private transient RenderListener rListener;
 
     public boolean collisionEnabled = true;
 

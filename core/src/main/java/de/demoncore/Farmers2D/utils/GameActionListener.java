@@ -1,6 +1,7 @@
 package de.demoncore.Farmers2D.utils;
 
 import com.badlogic.gdx.math.Vector2;
+import de.demoncore.Farmers2D.itemSystem.Item;
 
 /**
  * Base class for handling game-related actions.
@@ -29,6 +30,8 @@ public abstract class GameActionListener {
      */
     public void onPlayerMovement(Vector2 movement) {}
 
-    public void onTabPressed() {};
+    public void onTabPressed() {}
+
+    public void onItemCollect(Item item){}
 }
 

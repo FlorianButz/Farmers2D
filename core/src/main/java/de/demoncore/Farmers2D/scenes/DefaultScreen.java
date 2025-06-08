@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import de.demoncore.Farmers2D.components.Inventory;
+import de.demoncore.Farmers2D.itemSystem.Item;
 import de.demoncore.Farmers2D.logic.Game;
 import de.demoncore.Farmers2D.gameObjects.GameObject;
 import de.demoncore.Farmers2D.gameObjects.InteractableObject;
@@ -20,6 +21,8 @@ import de.demoncore.Farmers2D.utils.KeyHandler;
 import de.demoncore.Farmers2D.utils.Logger;
 import de.demoncore.Farmers2D.utils.UtilityMethods;
 import de.demoncore.Farmers2D.utils.enums.QuestType;
+
+import java.util.ArrayList;
 
 import static com.badlogic.gdx.scenes.scene2d.ui.Value.percentHeight;
 import static com.badlogic.gdx.scenes.scene2d.ui.Value.percentWidth;
@@ -73,13 +76,20 @@ public class DefaultScreen extends BaseScreen {
                 new Runnable() {
                     @Override
                     public void run() {
-                        QuestManager.instance.addNewQuest(QuestManager.instance.getNewQuest(QuestType.POSITION,
+                        ArrayList<Item> items = new ArrayList<>();
+                        String itemList = "";
+                        for (int i = 0; i < MathUtils.random(1, 5); i++) {
+                            items.add(new Item(i, MathUtils.random(1,20)));
+                            itemList += " id->" + items.get(items.size() - 1).id + " stack->" + items.get(items.size() - 1).stackSize;
+                        }
+                        
+                        QuestManager.instance.addNewQuest(QuestManager.instance.getNewQuest(QuestType.COLLECT,
                                 "Test",
-                                "Just a test",
+                                itemList,
                                 0,
                                 1,
-                                null,
-                                new Vector2(1000, 1000) ), false);
+                                items,
+                                null), false);
 
                         for(Quest q : QuestManager.instance.currentQuests){
                             Logger.logInfo(q.toString());

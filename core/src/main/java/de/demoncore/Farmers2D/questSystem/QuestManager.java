@@ -6,6 +6,7 @@ import de.demoncore.Farmers2D.logic.Settings;
 import de.demoncore.Farmers2D.questSystem.quests.*;
 import de.demoncore.Farmers2D.saveFiles.SaveFile;
 import de.demoncore.Farmers2D.saveFiles.SaveManager;
+import de.demoncore.Farmers2D.utils.GameActionListener;
 import de.demoncore.Farmers2D.utils.KeyHandler;
 import de.demoncore.Farmers2D.utils.Logger;
 import de.demoncore.Farmers2D.utils.enums.QuestType;
@@ -31,15 +32,10 @@ public class QuestManager {
             instance = loaded;
         }
 
-        for(Quest q : currentQuests){
-            if(q.listener != null){
-                KeyHandler.instance.add(q.listener, "Quest ->" + q.id);
-            }
-        }
     }
 
     public boolean addNewQuest(Quest quest, boolean force){
-        if(!force && currentQuests.size() >= maxQuestCapacity || quest == null) return false;
+        if((!force && currentQuests.size() >= maxQuestCapacity) || quest == null) return false;
         currentQuests.add(quest);
         return true;
     }
@@ -121,5 +117,28 @@ public class QuestManager {
 
     public int getCurrentId() {
         return ++lastId;
+    }
+
+    public void loadListeners() {
+        Logger.logInfo("size->"+currentQuests.size());
+
+        for(Quest q : currentQuests){
+
+            if(q.type == QuestType.COLLECT){
+                q.listener = new GameActionListener() {
+                    @Override
+                    public void onItemCollect(Item item) {
+                        super.onItemCollect(item);
+                        ((CollectQuest) q).refreshItems(item);
+                    }
+                };
+                KeyHandler.instance.add(q.listener, "Quest ->" + q.id);
+                continue;
+            }
+
+            if(q.listener != null){
+                KeyHandler.instance.add(q.listener, "Quest ->" + q.id);
+            }
+        }
     }
 }

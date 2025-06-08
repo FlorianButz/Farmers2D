@@ -15,7 +15,7 @@ public abstract class Quest {
     public int difficulty;
     public int rank;
     public Runnable questReward;
-    public GameActionListener listener;
+    public transient GameActionListener listener;
 
     public Quest(){}
 

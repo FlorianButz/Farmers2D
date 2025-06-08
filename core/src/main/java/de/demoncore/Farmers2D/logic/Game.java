@@ -18,6 +18,7 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     public static Game instance;
 
     KeyHandler keyHandler = new KeyHandler();
+    public GameState state = new GameState();
 
     Stage currentStage;
     QuestManager questManager;
@@ -153,6 +154,7 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
         switchScreens(defaultScreen);
         Settings.load();
         QuestManager.instance.load();
+        QuestManager.instance.loadListeners();
         Logger.logInfo("quests->"+QuestManager.instance.currentQuests.size());
         finishedLoading = true;
     }
