@@ -28,10 +28,7 @@ public class QuestManager {
 
     public void load(){
         QuestManager loaded = SaveManager.loadFromFile(SaveFile.QUESTMANAGER, QuestManager.class, instance);
-        if (loaded != null) {
-            instance = loaded;
-        }
-
+        if (loaded != null) instance = loaded;
     }
 
     public boolean addNewQuest(Quest quest, boolean force){

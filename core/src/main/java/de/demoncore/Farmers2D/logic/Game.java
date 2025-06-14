@@ -27,7 +27,8 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     private String lastScreen;
 
     public InputMultiplexer multiplexer = new InputMultiplexer();
-    public ArrayList<RenderListener> rListeners = new ArrayList<>();
+    public ArrayList<RenderListener> renderListeners = new ArrayList<>();
+    public ArrayList<TimeListener> timeListeners = new ArrayList<>();
 
     public boolean isPaused = false;
     boolean finishedLoading;
@@ -131,7 +132,7 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     }
 
     public void addRenderListener(RenderListener rListener) {
-        rListeners.add(rListener);
+        renderListeners.add(rListener);
     }
 
     @Override
@@ -156,6 +157,8 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
         QuestManager.instance.load();
         QuestManager.instance.loadListeners();
         Logger.logInfo("quests->"+QuestManager.instance.currentQuests.size());
+        GameState.load();
+
         finishedLoading = true;
     }
 

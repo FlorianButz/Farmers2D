@@ -16,6 +16,7 @@ import de.demoncore.Farmers2D.gameObjects.InteractableObject;
 import de.demoncore.Farmers2D.gameObjects.Player;
 import de.demoncore.Farmers2D.questSystem.QuestManager;
 import de.demoncore.Farmers2D.questSystem.quests.Quest;
+import de.demoncore.Farmers2D.time.TimeManager;
 import de.demoncore.Farmers2D.utils.GameActionListener;
 import de.demoncore.Farmers2D.utils.KeyHandler;
 import de.demoncore.Farmers2D.utils.Logger;
@@ -107,6 +108,10 @@ public class DefaultScreen extends BaseScreen {
                 .padBottom(20);
 
         //stage.setDebugAll(true);
+
+        TimeManager tM = new TimeManager();
+        addObject(tM);
+
     }
 
     @Override

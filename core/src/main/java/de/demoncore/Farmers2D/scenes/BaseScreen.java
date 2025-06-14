@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.*;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -51,7 +52,7 @@ public class BaseScreen implements Screen {
      */
     public void drawSprites(){
         sb.begin();
-        for(RenderListener rL : new ArrayList<>(Game.instance.rListeners)) rL.onRenderBatch(sb);
+        for(RenderListener rL : new ArrayList<>(Game.instance.renderListeners)) rL.onRenderBatch(sb);
         sb.end();
     }
 
@@ -117,16 +118,25 @@ public class BaseScreen implements Screen {
         }
         srFilled.begin(ShapeType.Filled);
         srLine.begin(ShapeType.Line);
-        for(RenderListener rL : new ArrayList<>(Game.instance.rListeners)) rL.onRenderShapes(srLine, srFilled);
+        for(RenderListener rL : new ArrayList<>(Game.instance.renderListeners)) rL.onRenderShapes(srLine, srFilled);
         drawSprites();
         drawInteractableText();
         if(Settings.instance.debug){
             sb.begin();
-            for(RenderListener rl : new ArrayList<>(Game.instance.rListeners)) rl.onRenderDebug(srLine, sb);
+            for(RenderListener rl : new ArrayList<>(Game.instance.renderListeners)) rl.onRenderDebug(srLine, sb);
             sb.end();
         }
         srLine.end();
         srFilled.end();
+
+        Matrix4 oldMatrix = sb.getProjectionMatrix();
+        sb.setProjectionMatrix(new Matrix4().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+
+        sb.begin();
+        for(RenderListener rl : new ArrayList<>(Game.instance.renderListeners)) rl.onRenderHUD(sb);
+        sb.end();
+
+        sb.setProjectionMatrix(oldMatrix);
     }
 
     /**

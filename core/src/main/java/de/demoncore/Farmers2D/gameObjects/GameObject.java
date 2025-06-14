@@ -56,6 +56,10 @@ public class GameObject {
                 drawDebug(sb, sr);
             }
 
+            @Override
+            public void onRenderHUD(SpriteBatch sb) {
+                drawHUD(sb);
+            }
         };
 
         Game.instance.addRenderListener(rListener);
@@ -84,6 +88,8 @@ public class GameObject {
     protected boolean shouldDraw(){
         return !isDistanceCulled && Game.instance.getScreen().screenObjects.contains(this);
     }
+
+    public void drawHUD(SpriteBatch sb){}
 
     /**
      * Returns a bounding rectangle used for collision or visibility checks.
