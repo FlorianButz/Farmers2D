@@ -22,11 +22,24 @@ public class Translation {
         german.put("component.button.btg", "Zurück zum Spiel");
         english.put("component.button.btg", "Return to Game");
 
+        german.put("component.button.btmm", "Zurück zur Speisekarte");
+        english.put("component.button.btmm", "Back to Main Menu");
+
         german.put("component.button.settings", "Einstellungen");
         english.put("component.button.settings", "Settings");
 
         german.put("component.button.play", "Spielen");
         english.put("component.button.play", "Play");
+
+        german.put("component.button.language", "Deutsch");
+        english.put("component.button.language", "English");
+
+        //settings
+        german.put("settings.debug", "Debug Modus");
+        english.put("settings.debug", "Debug Mode");
+
+        german.put("settings.language", "Sprache");
+        english.put("settings.language", "Language");
 
         Logger.logInfo("complete Loading translations");
     }

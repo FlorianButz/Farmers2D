@@ -7,6 +7,10 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+
+import java.util.ArrayList;
 
 public class Resources {
 
@@ -16,6 +20,8 @@ public class Resources {
     public static BitmapFont debugFont;
     public static FileHandle debugFontFile;
     public static Skin uiSkin;
+    public static Skin toggleSwitch;
+    public static ArrayList<Drawable> toggleSwitchState;
 
     public static BitmapFont pixelFont;
 
@@ -28,6 +34,13 @@ public class Resources {
         debugFontFile = Gdx.files.internal("fonts/0.ttf");
         debugFont = getFontTTF(debugFontFile, 10);
         uiSkin = new Skin(Gdx.files.internal("ui/uiskin.json"));
+        toggleSwitch = new Skin(Gdx.files.internal("ui/skins/toggleSwitch/toggleSwitch.json"));
+        toggleSwitch.add("customFont", getFontTTF(debugFontFile, 10), BitmapFont.class);
+
+        toggleSwitchState = new ArrayList<>();
+        toggleSwitchState.add(new TextureRegionDrawable(toggleSwitch.getRegion("toggleButtonOn")));
+        toggleSwitchState.add(new TextureRegionDrawable(toggleSwitch.getRegion("toggleButtonMiddle")));
+        toggleSwitchState.add(new TextureRegionDrawable(toggleSwitch.getRegion("toggleButtonOff")));
 
         Logger.logInfo("Resources loaded");
         initialized = true;

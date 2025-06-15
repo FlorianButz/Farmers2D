@@ -51,7 +51,7 @@ public class PauseMenu extends GUIScreen{
                 super.onEscapePressed();
                 Game.instance.switchScreenBack();
             }
-        }, "MainMenu");
+        }, "PauseMenu");
 
         DTextButton backToGame = new DTextButton(Translation.get("component.button.btg"));
         backToGame.addListener(new ClickListener(){
@@ -67,11 +67,21 @@ public class PauseMenu extends GUIScreen{
         settings.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                Logger.logInfo("settings");
+                Game.instance.switchScreens("settings");
                 super.clicked(event, x, y);
             }
         });
         addComponent(settings, 30f, 7.5f);
+
+        DTextButton backToMainMenu = new DTextButton(Translation.get("component.button.btmm"));
+        backToMainMenu.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Game.instance.switchScreens("main");
+                super.clicked(event, x, y);
+            }
+        });
+        addComponent(backToMainMenu, 30f, 7.5f);
     }
 
     @Override

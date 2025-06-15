@@ -1,0 +1,34 @@
+
+toggleSwitch.png
+size: 1024, 1024
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+pixel
+  rotate: false
+  xy: 1, 41
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+toggleButtonOff
+  rotate: false
+  xy: 1, 21
+  size: 36, 18
+  orig: 36, 18
+  offset: 0, 0
+  index: -1
+toggleButtonOn
+  rotate: false
+  xy: 515, 535
+  size: 36, 18
+  orig: 36, 18
+  offset: 0, 0
+  index: -1
+toggleButtonMiddle
+  rotate: false
+  xy: 1, 1
+  size: 36, 18
+  orig: 36, 18
+  offset: 0, 0
+  index: -1

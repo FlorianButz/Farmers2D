@@ -9,6 +9,10 @@ ui/font-window.fnt
 ui/font.fnt
 ui/pixel.fnt
 ui/pixel.png
+ui/skins/toggleSwitch/pixel.fnt
+ui/skins/toggleSwitch/toggleSwitch.atlas
+ui/skins/toggleSwitch/toggleSwitch.json
+ui/skins/toggleSwitch/toggleSwitch.png
 ui/uiskin.atlas
 ui/uiskin.json
 ui/uiskin.png

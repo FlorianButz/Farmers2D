@@ -18,4 +18,15 @@ public class Settings {
             instance = loaded;
         }
     }
+
+    public void changeLanguage() {
+        if(currentLanguage == Language.GERMAN) {
+            currentLanguage = Language.ENGLISH;
+            return;
+        }
+        if(currentLanguage == Language.ENGLISH){
+            currentLanguage = Language.GERMAN;
+            return;
+        }
+    }
 }

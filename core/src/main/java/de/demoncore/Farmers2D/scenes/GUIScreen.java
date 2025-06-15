@@ -32,9 +32,7 @@ public class GUIScreen extends BaseScreen {
 
     @Override
     public void show() {
-
         table.clear();
-
         super.show();
     }
 

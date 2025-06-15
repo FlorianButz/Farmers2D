@@ -124,11 +124,13 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
             pM.setBackground(texture);
             lastScreen = getScreenKey(getScreen());
             setScreen(pM);
+            //Logger.logWarning("currentScreen->"+getScreenKey(getScreen())+ " lastScreen->"+lastScreen);
             return;
         }
 
         lastScreen = getScreenKey(getScreen());
         setScreen(screens.get(screen));
+        //Logger.logWarning("currentScreen->"+getScreenKey(getScreen())+ " lastScreen->"+lastScreen);
     }
 
     public void addRenderListener(RenderListener rListener) {
@@ -143,6 +145,7 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     public void finishLoading(){
         Translation translation = new Translation();
         translation.init();
+        Settings.load();
 
         initScreens();
 
@@ -153,7 +156,6 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
         Logger.logInfo("Setting screen to DefaultScene");
 
         switchScreens(defaultScreen);
-        Settings.load();
         QuestManager.instance.load();
         QuestManager.instance.loadListeners();
         Logger.logInfo("quests->"+QuestManager.instance.currentQuests.size());
@@ -166,6 +168,7 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
         screens.put("main", new MainMenu());
         screens.put("default", new DefaultScreen());
         screens.put("pause", new PauseMenu());
+        screens.put("settings", new SettingsScreen());
     }
 
     public void switchScreenBack(){
