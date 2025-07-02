@@ -133,7 +133,7 @@ public class BaseScreen implements Screen {
         sb.setProjectionMatrix(new Matrix4().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
 
         sb.begin();
-        for(RenderListener rl : new ArrayList<>(Game.instance.renderListeners)) rl.onRenderHUD(sb);
+        for(RenderListener rl : new ArrayList<>(Game.instance.renderListeners)) rl.onRenderHUD(sb, srLine, srFilled);
         sb.end();
 
         sb.setProjectionMatrix(oldMatrix);

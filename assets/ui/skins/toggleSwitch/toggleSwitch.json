@@ -29,8 +29,10 @@ com.badlogic.gdx.graphics.Color: {
 }
 com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle: {
 	default: {
-		checkboxOn: toggleButtonOn
-		checkboxOff: toggleButtonOff
+		checkboxOn: toggleButtonOnV2NoBorder
+		checkboxOff: toggleButtonOffV2NoBorder
+		checkboxOnOver: toggleButtonOnV2
+		checkboxOver: toggleButtonOffV2
 		font: pixel
 		fontColor: White
 	}

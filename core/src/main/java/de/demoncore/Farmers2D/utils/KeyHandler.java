@@ -104,7 +104,7 @@ public class KeyHandler extends InputAdapter {
      */
     public void add(GameActionListener gameActionListener, String name) {
         listeners.add(gameActionListener);
-        Logger.logInfo("added new Listener (" + name + ") newSize->" + listeners.size());
+        //Logger.logInfo("added new Listener (" + name + ") newSize->" + listeners.size());
     }
 
     /**

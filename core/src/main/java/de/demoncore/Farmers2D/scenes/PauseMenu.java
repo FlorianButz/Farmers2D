@@ -16,6 +16,8 @@ import de.demoncore.Farmers2D.logic.Game;
 import de.demoncore.Farmers2D.ui.DTextButton;
 import de.demoncore.Farmers2D.utils.*;
 
+import java.util.Arrays;
+
 public class PauseMenu extends GUIScreen{
 
     private GameActionListener listener;
@@ -49,7 +51,7 @@ public class PauseMenu extends GUIScreen{
             @Override
             public void onEscapePressed() {
                 super.onEscapePressed();
-                Game.instance.switchScreenBack();
+                Game.instance.switchScreenBack(Arrays.asList("settings", "pause"));
             }
         }, "PauseMenu");
 

@@ -46,5 +46,18 @@ public class UtilityMethods {
         return  String.format(format, v.x, v.y);
     }
 
+    public static float getPercentage(float value, float min, float max){
+        float percent;
+        if (max != min) {
+            if(max < min){
+                percent = (value - max) * 100f / (min - max);
+            }else {
+                percent = (value - min) * 100f / (max - min);
+            }
+        } else {
+            percent = 0f;
+        }
+        return percent;
+    }
 
 }

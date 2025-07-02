@@ -57,7 +57,7 @@ public class GameObject {
             }
 
             @Override
-            public void onRenderHUD(SpriteBatch sb) {
+            public void onRenderHUD(SpriteBatch sb, ShapeRenderer srLine, ShapeRenderer srFilled) {
                 drawHUD(sb);
             }
         };
@@ -79,6 +79,7 @@ public class GameObject {
 
     public void drawShapes(ShapeRenderer srLine, ShapeRenderer srFilled) {
         if(!shouldDraw()) return;
+        if(color == null) return;
         srFilled.setColor(color);
         srFilled.rect(pos.x, pos.y, size.x, size.y);
     }

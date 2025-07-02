@@ -9,9 +9,7 @@ import de.demoncore.Farmers2D.saveFiles.SaveManager;
 import de.demoncore.Farmers2D.scenes.*;
 import de.demoncore.Farmers2D.utils.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /** Main game class managing screens and input */
 public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
@@ -24,7 +22,7 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     QuestManager questManager;
     private HashMap<String, BaseScreen> screens = new HashMap<>();
     private String defaultScreen = "main";
-    private String lastScreen;
+    private Deque<String> lastScreen = new ArrayDeque<>();
 
     public InputMultiplexer multiplexer = new InputMultiplexer();
     public ArrayList<RenderListener> renderListeners = new ArrayList<>();
@@ -116,19 +114,19 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
      * @param screen index of screen to switch to
      */
     public void switchScreens(String screen){
-        if(screens.get(screen) instanceof PauseMenu){
+        if(screens.get(screen) instanceof PauseMenu && !getScreenKey(getScreen()).equals("settings")){
             PauseMenu pM = (PauseMenu) screens.get(screen);
             BaseScreen bS = getScreen();
             TextureRegion texture = bS.takeScreenshotTexture();
 
             pM.setBackground(texture);
-            lastScreen = getScreenKey(getScreen());
+            addLastScreen(getScreenKey(getScreen()));
             setScreen(pM);
             //Logger.logWarning("currentScreen->"+getScreenKey(getScreen())+ " lastScreen->"+lastScreen);
             return;
         }
 
-        lastScreen = getScreenKey(getScreen());
+        addLastScreen(getScreenKey(getScreen()));
         setScreen(screens.get(screen));
         //Logger.logWarning("currentScreen->"+getScreenKey(getScreen())+ " lastScreen->"+lastScreen);
     }
@@ -172,7 +170,34 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     }
 
     public void switchScreenBack(){
-        switchScreens(lastScreen);
+        switchScreens(getLastScreen());
+    }
+
+    public void switchScreenBack(List<String> exclude){
+        switchScreens(getLastScreen(exclude));
+    }
+
+    private void addLastScreen(String lastScreen){
+        if (lastScreen == null) return;
+        this.lastScreen.push(lastScreen);
+        if(this.lastScreen.size() > 15) this.lastScreen.removeLast();
+    }
+
+    private String getLastScreen(){
+        if (lastScreen.isEmpty()) {
+            Logger.logWarning("Screen stack is empty, returning default screen");
+            return "main";
+        }
+        return lastScreen.pop();
+    }
+
+    private String getLastScreen(List<String> exclude) {
+        while (!lastScreen.isEmpty()) {
+            String key = lastScreen.pop();
+            if (!exclude.contains(key)) return key;
+        }
+        Logger.logWarning("No screen found matching exclusion list -> " + exclude);
+        return "main";
     }
 
     public String getScreenKey(BaseScreen screen){

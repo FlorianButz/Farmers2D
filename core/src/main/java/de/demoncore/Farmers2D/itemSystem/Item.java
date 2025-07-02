@@ -22,7 +22,7 @@ public class Item extends GameObject {
      * @param pos    the position of the item in world coordinates
      */
     public Item(Sprite sprite, Vector2 pos) {
-        super(pos, new Vector2(20, 20), Color.BLUE);
+        super(pos, new Vector2(20, 20), null);
         this.sprite = sprite;
 
     }

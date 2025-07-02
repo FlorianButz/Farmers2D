@@ -30,7 +30,21 @@ public class ToggleSwitch extends CheckBox {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        states.get(currentState).draw(batch, getX(), getY(), getWidth(), getHeight());
+        Drawable drawableToDraw;
+        if (isOver()) {
+            if (currentState == 0) {
+                drawableToDraw = states.get(3);
+            } else if (currentState == 2) {
+                drawableToDraw = states.get(4);
+            } else {
+                drawableToDraw = states.get(currentState);
+            }
+        } else {
+            drawableToDraw = states.get(currentState);
+        }
+
+        drawableToDraw.draw(batch, getX(), getY(), getWidth(), getHeight());
+
         frameTimer++;
         if(frameTimer >= 2){
             if(currentState == targetState) return;

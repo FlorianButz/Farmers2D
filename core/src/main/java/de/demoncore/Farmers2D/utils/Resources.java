@@ -38,9 +38,11 @@ public class Resources {
         toggleSwitch.add("customFont", getFontTTF(debugFontFile, 10), BitmapFont.class);
 
         toggleSwitchState = new ArrayList<>();
-        toggleSwitchState.add(new TextureRegionDrawable(toggleSwitch.getRegion("toggleButtonOn")));
-        toggleSwitchState.add(new TextureRegionDrawable(toggleSwitch.getRegion("toggleButtonMiddle")));
-        toggleSwitchState.add(new TextureRegionDrawable(toggleSwitch.getRegion("toggleButtonOff")));
+        toggleSwitchState.add(new TextureRegionDrawable(toggleSwitch.getRegion("toggleButtonOnV2NoBorder")));
+        toggleSwitchState.add(new TextureRegionDrawable(toggleSwitch.getRegion("toggleButtonMiddleV2")));
+        toggleSwitchState.add(new TextureRegionDrawable(toggleSwitch.getRegion("toggleButtonOffV2NoBorder")));
+        toggleSwitchState.add(new TextureRegionDrawable(toggleSwitch.getRegion("toggleButtonOnV2")));
+        toggleSwitchState.add(new TextureRegionDrawable(toggleSwitch.getRegion("toggleButtonOffV2")));
 
         Logger.logInfo("Resources loaded");
         initialized = true;

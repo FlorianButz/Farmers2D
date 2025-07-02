@@ -17,7 +17,7 @@ public class TimeManager extends GameObject {
     public float speed = 1;
 
     public TimeManager() {
-        super(Vector2.Zero.cpy(), Vector2.Zero.cpy(), Color.BLACK);
+        super(Vector2.Zero.cpy(), Vector2.Zero.cpy(), null);
 
         currentTime = new Time();
     }

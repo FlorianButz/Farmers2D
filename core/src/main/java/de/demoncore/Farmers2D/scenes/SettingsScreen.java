@@ -59,7 +59,7 @@ public class SettingsScreen extends GUIScreen{
         tS.setChecked(Settings.instance.debug);
 
         addComponentToTable(l1, innerTable, 40, 5);
-        addComponentToTable(tS, innerTable, 8, 5);
+        addComponentToTable(tS, innerTable, 10, 5);
         innerTable.row();
 
         Label l2 = new Label(Translation.get("settings.language"), customStyle);
