@@ -40,9 +40,7 @@ public class DefaultScreen extends BaseScreen {
     /**
      * Constructs the default screen and logs its creation.
      */
-    public DefaultScreen(){
-        Logger.logInfo("loaded new Default Screen");
-    }
+    public DefaultScreen(){}
 
     @Override
     public void initialize() {
@@ -116,7 +114,7 @@ public class DefaultScreen extends BaseScreen {
 
     @Override
     public void show() {
-        Logger.logInfo("shown default Screen");
+//        Logger.logInfo("shown default Screen");
 
         KeyHandler.instance.add(listener = new GameActionListener(){
             @Override

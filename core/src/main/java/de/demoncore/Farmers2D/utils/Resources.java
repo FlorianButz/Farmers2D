@@ -50,7 +50,7 @@ public class Resources {
 
     public static BitmapFont getFontTTF(FileHandle file, int fontSize) {
         if(file == null) return null;
-        Logger.logInfo("file->"+file);
+        //Logger.logInfo("file->"+file);
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(file);
         FreeTypeFontParameter parameter = new FreeTypeFontParameter();
         parameter.size = fontSize;

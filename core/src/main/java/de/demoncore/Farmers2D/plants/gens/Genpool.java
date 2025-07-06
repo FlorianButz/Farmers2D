@@ -1,6 +1,5 @@
 package de.demoncore.Farmers2D.plants.gens;
 
-import com.badlogic.gdx.math.MathUtils;
 import de.demoncore.Farmers2D.utils.Logger;
 
 import java.util.ArrayList;
@@ -45,6 +44,25 @@ public class Genpool {
         }
 
         return newPool;
+    }
+
+    /**
+     *  Gen id List:<pre>
+     *  0 -> height             numeric
+     *  1 -> yield              numeric
+     *  2 -> spreadRange        numeric
+     *  </pre>
+     * @param id    The id of the gen to get the value of
+     * @return      The value of the gen with the provided id <br> Failsafe value -1
+     */
+    public float getNumericGenValue(int id){
+        for (Gen g : gens){
+            if(g instanceof NumericGen) {
+                NumericGen numGen = (NumericGen) g;
+                if (numGen.id == id) return (float) g.value;
+            }
+        }
+        return -1;
     }
 
 }

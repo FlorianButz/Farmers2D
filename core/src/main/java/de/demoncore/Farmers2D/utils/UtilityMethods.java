@@ -1,5 +1,6 @@
 package de.demoncore.Farmers2D.utils;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import de.demoncore.Farmers2D.logic.Game;
@@ -60,4 +61,11 @@ public class UtilityMethods {
         return percent;
     }
 
+    public static int[] randomArray(int values, int min, int max) {
+        int[] temp = new int[values];
+        for (int i = 0; i < values; i++) {
+            temp[i] = MathUtils.random(min, max + 1);
+        }
+        return temp;
+    }
 }

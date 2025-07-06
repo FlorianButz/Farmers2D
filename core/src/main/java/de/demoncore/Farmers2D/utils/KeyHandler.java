@@ -3,9 +3,11 @@ package de.demoncore.Farmers2D.utils;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.Vector2;
+import de.demoncore.Farmers2D.gameObjects.Player;
 import de.demoncore.Farmers2D.itemSystem.Item;
 import de.demoncore.Farmers2D.logic.Game;
 import de.demoncore.Farmers2D.logic.GameState;
+import de.demoncore.Farmers2D.plants.Plant;
 
 import java.util.ArrayList;
 
@@ -54,16 +56,20 @@ public class KeyHandler extends InputAdapter {
             playerInput.sub(new Vector2(0, 1));
         }
 
-        if(keycode == Input.Keys.NUM_1){
-            Game.instance.state.addItem(new Item(0, 1));
-        }else if(keycode == Input.Keys.NUM_2){
-            Game.instance.state.addItem(new Item(1, 1));
-        }else if(keycode == Input.Keys.NUM_3){
-            Game.instance.state.addItem(new Item(2, 1));
-        }else if(keycode == Input.Keys.NUM_4){
-            Game.instance.state.addItem(new Item(3, 1));
-        }else if(keycode == Input.Keys.NUM_5){
-            Game.instance.state.addItem(new Item(4, 1));
+//        if(keycode == Input.Keys.NUM_1){
+//            Game.instance.state.addItem(new Item(0, 1));
+//        }else if(keycode == Input.Keys.NUM_2){
+//            Game.instance.state.addItem(new Item(1, 1));
+//        }else if(keycode == Input.Keys.NUM_3){
+//            Game.instance.state.addItem(new Item(2, 1));
+//        }else if(keycode == Input.Keys.NUM_4){
+//            Game.instance.state.addItem(new Item(3, 1));
+//        }else if(keycode == Input.Keys.NUM_5){
+//            Game.instance.state.addItem(new Item(4, 1));
+//        }
+
+        if(keycode == Input.Keys.NUMPAD_0){
+            Game.instance.getScreen().addObject(Plant.getNewPlant(0, Player.instance.pos.cpy().add(new Vector2(50, 0))));
         }
 
         isAnyKeyPressed = pressedKeys.size() != 0;

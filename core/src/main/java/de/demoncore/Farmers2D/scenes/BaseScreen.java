@@ -130,13 +130,23 @@ public class BaseScreen implements Screen {
         srFilled.end();
 
         Matrix4 oldMatrix = sb.getProjectionMatrix();
+        Matrix4 oldMatrix1 = srFilled.getProjectionMatrix();
+        Matrix4 oldMatrix2 = srLine.getProjectionMatrix();
         sb.setProjectionMatrix(new Matrix4().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        srFilled.setProjectionMatrix(new Matrix4().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        srLine.setProjectionMatrix(new Matrix4().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
 
         sb.begin();
+        srFilled.begin(ShapeType.Filled);
+        srLine.begin(ShapeType.Line);
         for(RenderListener rl : new ArrayList<>(Game.instance.renderListeners)) rl.onRenderHUD(sb, srLine, srFilled);
         sb.end();
+        srFilled.end();
+        srLine.end();
 
         sb.setProjectionMatrix(oldMatrix);
+        srFilled.setProjectionMatrix(oldMatrix1);
+        srLine.setProjectionMatrix(oldMatrix2);
     }
 
     /**

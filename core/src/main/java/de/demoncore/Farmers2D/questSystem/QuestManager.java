@@ -117,7 +117,7 @@ public class QuestManager {
     }
 
     public void loadListeners() {
-        Logger.logInfo("size->"+currentQuests.size());
+        //Logger.logInfo("size->"+currentQuests.size());
 
         for(Quest q : currentQuests){
 

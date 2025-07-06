@@ -142,7 +142,6 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
 
     public void finishLoading(){
         Translation translation = new Translation();
-        translation.init();
         Settings.load();
 
         initScreens();
@@ -156,7 +155,7 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
         switchScreens(defaultScreen);
         QuestManager.instance.load();
         QuestManager.instance.loadListeners();
-        Logger.logInfo("quests->"+QuestManager.instance.currentQuests.size());
+        //Logger.logInfo("quests->"+QuestManager.instance.currentQuests.size());
         GameState.load();
 
         finishedLoading = true;
@@ -181,6 +180,10 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
         if (lastScreen == null) return;
         this.lastScreen.push(lastScreen);
         if(this.lastScreen.size() > 15) this.lastScreen.removeLast();
+        int index = 0;
+//        for (String s : this.lastScreen){
+//            Logger.logInfo("Stack[" + index++ + "] = " + s);
+//        }
     }
 
     private String getLastScreen(){
@@ -194,6 +197,7 @@ public class Game extends com.badlogic.gdx.Game implements ApplicationListener {
     private String getLastScreen(List<String> exclude) {
         while (!lastScreen.isEmpty()) {
             String key = lastScreen.pop();
+            //Logger.logInfo("Checking exclude: key='" + key + "', equals=" + exclude.contains(key));
             if (!exclude.contains(key)) return key;
         }
         Logger.logWarning("No screen found matching exclusion list -> " + exclude);
