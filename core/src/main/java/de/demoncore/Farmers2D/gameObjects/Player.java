@@ -27,6 +27,7 @@ public class Player extends RigidBody {
     public Player(Vector2 pos, Vector2 size) {
         super(pos, size, Color.WHITE);
         instance = this;
+        //moveSpeed = 2f;
     }
 
     @Override

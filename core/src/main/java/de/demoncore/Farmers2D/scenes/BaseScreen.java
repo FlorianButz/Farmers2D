@@ -12,12 +12,15 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.demoncore.Farmers2D.gameObjects.GameObject;
 import de.demoncore.Farmers2D.gameObjects.InteractableObject;
 import de.demoncore.Farmers2D.logic.Game;
+import de.demoncore.Farmers2D.logic.GameState;
 import de.demoncore.Farmers2D.logic.Settings;
+import de.demoncore.Farmers2D.logic.TileMap;
 import de.demoncore.Farmers2D.utils.*;
 
 import java.util.ArrayList;
@@ -34,6 +37,8 @@ public class BaseScreen implements Screen {
     protected GameObject cameraFollowObject;
 
     public ArrayList<GameObject> screenObjects = new ArrayList<>();
+
+    protected TileMap map;
 
     /**
      * Adds a GameObject to the screen without immediately attaching a visual representation.
@@ -82,15 +87,22 @@ public class BaseScreen implements Screen {
         sb = new SpriteBatch();
 
         camera = new OrthographicCamera();
-        viewport = new FitViewport(windowSize.x, windowSize.y, camera);
+        viewport = new ExtendViewport(windowSize.x, windowSize.y, camera);
         viewport.apply();
 
-        camera.position.set(windowSize.x / 2f, windowSize.y / 2f, 0);
+        camera.position.set(0,0,0);
         camera.update();
     }
 
     @Override
     public void show() {
+        if(map != null) {
+            map.mapRenderer.setView(camera);
+            for (GameObject gO : map.collisionBoxes) {
+                addObject(gO);
+            }
+        }
+        
         for(GameObject gO : screenObjects){
             gO.onCreation();
         }
@@ -102,13 +114,21 @@ public class BaseScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         if(cameraFollowObject != null) {
             camera.position.lerp(new Vector3(cameraFollowObject.pos.x, cameraFollowObject.pos.y, 0), 0.1f);
+            camera.zoom = GameState.instance.cameraZoom;
 
             camera.update();
             srFilled.setProjectionMatrix(camera.combined);
             srLine.setProjectionMatrix(camera.combined);
             sb.setProjectionMatrix(camera.combined);
+
+            if(map != null){
+                map.mapRenderer.setView(camera);
+            }
+
         }
         Rectangle viewportRect = calcViewport();
+
+        if(map != null) map.mapRenderer.render(new int[]{0, 1});
 
         for(GameObject g : screenObjects){
             if(g == null) continue;
@@ -121,13 +141,18 @@ public class BaseScreen implements Screen {
         for(RenderListener rL : new ArrayList<>(Game.instance.renderListeners)) rL.onRenderShapes(srLine, srFilled);
         drawSprites();
         drawInteractableText();
+        srLine.end();
+        srFilled.end();
+
+        if(map != null) map.mapRenderer.render(new int[]{3, 4});
+
         if(Settings.instance.debug){
+            srLine.begin(ShapeType.Line);
             sb.begin();
             for(RenderListener rl : new ArrayList<>(Game.instance.renderListeners)) rl.onRenderDebug(srLine, sb);
             sb.end();
+            srLine.end();
         }
-        srLine.end();
-        srFilled.end();
 
         Matrix4 oldMatrix = sb.getProjectionMatrix();
         Matrix4 oldMatrix1 = srFilled.getProjectionMatrix();
@@ -147,6 +172,8 @@ public class BaseScreen implements Screen {
         sb.setProjectionMatrix(oldMatrix);
         srFilled.setProjectionMatrix(oldMatrix1);
         srLine.setProjectionMatrix(oldMatrix2);
+
+
     }
 
     /**

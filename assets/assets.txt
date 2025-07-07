@@ -3,6 +3,11 @@ config/settings.json
 fonts/0.ttf
 game/gameState.json
 game/questManager.json
+tiledMaps/map1/rules.txt
+tiledMaps/map1/rules/rule1.tmx
+tiledMaps/map1/test1.tmx
+tiledMaps/map1/zeo254-completed-commission.png
+tiledMaps/map1/zeo254-completed-commission.tsx
 ui/font-list.fnt
 ui/font-subtitle.fnt
 ui/font-window.fnt

@@ -12,6 +12,7 @@ public class GameState {
 
     public ArrayList<Item> invItems = new ArrayList<>();
     public String currentTime = "";
+    public float cameraZoom = 0.5f;
 
     public GameState(){
         instance = this;

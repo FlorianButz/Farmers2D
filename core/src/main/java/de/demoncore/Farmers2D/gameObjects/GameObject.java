@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import de.demoncore.Farmers2D.logic.Game;
+import de.demoncore.Farmers2D.logic.GameState;
 import de.demoncore.Farmers2D.utils.RenderListener;
 import de.demoncore.Farmers2D.utils.UtilityMethods;
 
@@ -70,9 +71,11 @@ public class GameObject {
 
         String className = getClass().getSimpleName();
         if(debugFont != null) {
-            debugFont.setColor(collisionEnabled ? Color.LIME : Color.RED);
-            debugFont.draw(sb, className, pos.x - size.x / 2, pos.y + size.y + 12); // 12px über dem Shape
-            debugFont.draw(sb, UtilityMethods.formatVector(pos, 2), pos.x - size.x / 2, pos.y + size.y + 24);
+            debugFont.getData().setScale(GameState.instance.cameraZoom);
+            debugFont.setColor(collisionEnabled ? Color.WHITE : Color.GRAY);
+            debugFont.draw(sb, className, pos.x - size.x / 2, pos.y + size.y + 8); // 8px über dem Shape
+            debugFont.draw(sb, UtilityMethods.formatVector(pos, 2), pos.x - size.x / 2, pos.y + size.y + 16);
+            debugFont.getData().setScale(1f);
         }
 
     }
@@ -81,7 +84,9 @@ public class GameObject {
         if(!shouldDraw()) return;
         if(color == null) return;
         srFilled.setColor(color);
-        srFilled.rect(pos.x, pos.y, size.x, size.y);
+        //float factor = GameState.instance.cameraZoom;
+        float factor = 1;
+        srFilled.rect(pos.x, pos.y, size.x * factor, size.y * factor);
     }
 
     public void drawBatch(SpriteBatch sb) {}
@@ -98,7 +103,9 @@ public class GameObject {
      * @return the bounding rectangle of the object
      */
     public Rectangle getBoundingBox() {
-        boundingBox.set(pos.x, pos.y, size.x, size.y);
+        //float factor = GameState.instance.cameraZoom;
+        float factor = 1;
+        boundingBox.set(pos.x, pos.y, size.x * factor, size.y * factor);
         return boundingBox;
     }
 
