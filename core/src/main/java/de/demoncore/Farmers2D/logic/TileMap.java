@@ -10,6 +10,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import de.demoncore.Farmers2D.gameObjects.GameObject;
+import de.demoncore.Farmers2D.utils.Logger;
 
 import java.util.ArrayList;
 
@@ -25,9 +26,13 @@ public class TileMap {
         this.scale = scale;
         map = new TmxMapLoader().load(path);
         mapRenderer = new OrthogonalTiledMapRenderer(map, scale);
-
-        MapObjects objects = map.getLayers().get("collisions").getObjects();
-
+        MapObjects objects;
+        try {
+            objects = map.getLayers().get("collisions").getObjects();
+        } catch (NullPointerException e) {
+            Logger.logError("no objects available", new NullPointerException());
+            return;
+        }
         for(MapObject obj : objects){
             RectangleMapObject rectObj = (RectangleMapObject) obj;
             Rectangle rect = rectObj.getRectangle();

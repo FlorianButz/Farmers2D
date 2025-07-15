@@ -57,6 +57,7 @@ public class Resources {
 
         //maps.add(new TileMap("tiledMaps/map1/test1.tmx", 2.5f));
         maps.add(new TileMap("tiledMaps/map1/test1.tmx", 1f));
+        maps.add(new TileMap("tiledMaps/map2.tmx", 1f));
 
         Logger.logInfo("Resources loaded");
         initialized = true;
