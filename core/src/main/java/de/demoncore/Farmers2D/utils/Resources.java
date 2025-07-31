@@ -57,8 +57,8 @@ public class Resources {
         toggleSwitchState.add(new TextureRegionDrawable(toggleSwitch.getRegion("toggleButtonOffV2")));
 
         //maps.add(new TileMap("tiledMaps/map1/test1.tmx", 2.5f));
-        maps.add(new TileMap("tiledMaps/map1/test1.tmx", 1f));
-        maps.add(new TileMap("tiledMaps/map2.tmx", 1f));
+        maps.add(new TileMap("tiledMaps/map1/test1.tmx", 1f, 5, 3));
+        maps.add(new TileMap("tiledMaps/map2/map2.tmx", 1f, 5, 5));
 
         for (TileMap map : maps){
             TiledMapTileSet tileSet = map.map.getTileSets().iterator().next();

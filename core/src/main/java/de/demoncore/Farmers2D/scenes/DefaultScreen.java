@@ -51,7 +51,7 @@ public class DefaultScreen extends BaseScreen {
         stage.addActor(table);
         camera.zoom = GameState.instance.cameraZoom;
 
-        Player p = new Player(new Vector2(1150, 3360), new Vector2(12.5f, 12.5f));
+        Player p = new Player(new Vector2(400, 400), new Vector2(12.5f, 12.5f));
         p.color = Color.GRAY;
         camera.translate(new Vector3(p.pos.x, p.pos.y, 0));
         cameraFollowObject = p;
@@ -98,8 +98,6 @@ public class DefaultScreen extends BaseScreen {
                     }
                 });
         addObject(QuestBoard);
-
-        tempObstacle();
 
         inv = new Inventory(new Skin(Gdx.files.internal("ui/uiskin.json")));
         table.add(inv)

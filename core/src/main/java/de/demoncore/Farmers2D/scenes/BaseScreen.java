@@ -8,12 +8,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.*;
-import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.demoncore.Farmers2D.gameObjects.GameObject;
 import de.demoncore.Farmers2D.gameObjects.InteractableObject;
@@ -153,7 +151,7 @@ public class BaseScreen implements Screen {
         }
         Rectangle viewportRect = calcViewport();
 
-        if(map != null) map.mapRenderer.render(new int[]{0, 1});
+        if(map != null) map.renderBehindPlayer();
 
         for(GameObject g : screenObjects){
             if(g == null) continue;
@@ -161,6 +159,7 @@ public class BaseScreen implements Screen {
 
             g.isDistanceCulled = !g.checkDistanceCulled(viewportRect);
         }
+        if(map != null) map.renderPlayerLayer();
         srFilled.begin(ShapeType.Filled);
         srLine.begin(ShapeType.Line);
         for(RenderListener rL : new ArrayList<>(Game.instance.renderListeners)) rL.onRenderShapes(srLine, srFilled);
@@ -169,7 +168,7 @@ public class BaseScreen implements Screen {
         srLine.end();
         srFilled.end();
 
-        if(map != null) map.mapRenderer.render(new int[]{3, 4});
+        if(map != null) map.renderBeforePlayer();
 
         if(Settings.instance.debug){
             srLine.begin(ShapeType.Line);

@@ -8,6 +8,9 @@ tiledMaps/map1/test1.tmx
 tiledMaps/map1/zeo254-completed-commission.png
 tiledMaps/map1/zeo254-completed-commission.tsx
 tiledMaps/map2.tmx
+tiledMaps/map2/Tileset.tsx
+tiledMaps/map2/TilesetV1.png
+tiledMaps/map2/map2.tmx
 tiledMaps/maps.tiled-project
 tiledMaps/maps.tiled-session
 ui/font-list.fnt
