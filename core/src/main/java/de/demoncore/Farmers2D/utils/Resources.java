@@ -10,6 +10,7 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
@@ -58,6 +59,11 @@ public class Resources {
         //maps.add(new TileMap("tiledMaps/map1/test1.tmx", 2.5f));
         maps.add(new TileMap("tiledMaps/map1/test1.tmx", 1f));
         maps.add(new TileMap("tiledMaps/map2.tmx", 1f));
+
+        for (TileMap map : maps){
+            TiledMapTileSet tileSet = map.map.getTileSets().iterator().next();
+            map.tilesetID = tileSet.getName();
+        }
 
         Logger.logInfo("Resources loaded");
         initialized = true;

@@ -26,3 +26,6 @@ lwjgl3/build/tmp/compileJava/previous-compilation-data.bin
 /lwjgl3/build
 /assets/config
 /assets/game
+assets/tiledMaps/maps.tiled-session
+/build
+/saves

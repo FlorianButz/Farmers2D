@@ -8,12 +8,16 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.*;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.demoncore.Farmers2D.gameObjects.GameObject;
 import de.demoncore.Farmers2D.gameObjects.InteractableObject;
+import de.demoncore.Farmers2D.gameObjects.Player;
 import de.demoncore.Farmers2D.logic.Game;
 import de.demoncore.Farmers2D.logic.GameState;
 import de.demoncore.Farmers2D.logic.Settings;
@@ -36,6 +40,30 @@ public class BaseScreen implements Screen {
     public ArrayList<GameObject> screenObjects = new ArrayList<>();
 
     protected TileMap map;
+
+    public Vector2 currentTileLocation(Vector2 playerPos){
+        return new Vector2((int)(playerPos.x / map.tileSize), (int)(playerPos.y / map.tileSize));
+    }
+
+    /**
+     * Replacec the
+     *
+     * @param tileID     The ID of the new Tile declared by the map
+     * @param layerID       The ID of the Layer to change
+     */
+    public void replaceCurrentTile(int tileID, int layerID){
+        TiledMapTile newTile = map.map.getTileSets().getTileSet(map.tilesetID).getTile(tileID);
+        TiledMapTileLayer layer = (TiledMapTileLayer) map.map.getLayers().get(layerID);
+        if(newTile == null || layer == null) {
+            Logger.logError("tileID or layerID returned null", new NullPointerException());
+        }
+
+        TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
+        cell.setTile(newTile);
+
+        Vector2 temp = currentTileLocation(Player.instance.pos);
+        layer.setCell((int) temp.x, (int) temp.y, cell);
+    }
 
     /**
      * Adds a GameObject to the screen without immediately attaching a visual representation.

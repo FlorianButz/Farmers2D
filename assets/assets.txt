@@ -1,8 +1,5 @@
 .gitkeep
-config/settings.json
 fonts/0.ttf
-game/gameState.json
-game/questManager.json
 tiledMaps/extruded-tileset.png
 tiledMaps/extruded-tileset.tsx
 tiledMaps/map1/rules.txt
@@ -11,6 +8,8 @@ tiledMaps/map1/test1.tmx
 tiledMaps/map1/zeo254-completed-commission.png
 tiledMaps/map1/zeo254-completed-commission.tsx
 tiledMaps/map2.tmx
+tiledMaps/maps.tiled-project
+tiledMaps/maps.tiled-session
 ui/font-list.fnt
 ui/font-subtitle.fnt
 ui/font-window.fnt

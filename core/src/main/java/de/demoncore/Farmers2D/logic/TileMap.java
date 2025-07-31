@@ -21,6 +21,8 @@ public class TileMap {
     public float scale;
 
     public ArrayList<GameObject> collisionBoxes = new ArrayList<>();
+    public float tileSize = 16;
+    public String tilesetID;
 
     public TileMap(String path, float scale){
         this.scale = scale;
