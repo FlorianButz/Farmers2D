@@ -11,6 +11,10 @@ tiledMaps/map2.tmx
 tiledMaps/map2/Tileset.tsx
 tiledMaps/map2/TilesetV1.png
 tiledMaps/map2/map2.tmx
+tiledMaps/map2/rules.txt
+tiledMaps/map2/rules/rule1.tmx
+tiledMaps/map2/rules/rule2.tmx
+tiledMaps/map2/rules/rule3.tmx
 tiledMaps/maps.tiled-project
 tiledMaps/maps.tiled-session
 ui/font-list.fnt
