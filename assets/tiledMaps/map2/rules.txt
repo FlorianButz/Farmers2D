@@ -1,14 +1,17 @@
-//rules/reset/1.tmx
-//rules/reset/2.tmx
-//rules/reset/3.tmx
-//rules/reset/4.tmx
+// rules for resetting biom features on the map
+rules/reset/1.tmx
+rules/reset/2.tmx
+rules/reset/3.tmx
+rules/reset/4.tmx
 
+// randomise biom features (Grass, bushes, stones,...)
 //rules/rule1.tmx
 //rules/rule2.tmx
 //rules/rule4.tmx
 //rules/rule3.tmx
 
-rules/reduceStone/1.tmx
-rules/reduceStone/2.tmx
-rules/reduceStone/3.tmx
-rules/reduceStone/4.tmx
+// reduce stones on the map
+//rules/reduceStone/1.tmx
+//rules/reduceStone/2.tmx
+//rules/reduceStone/3.tmx
+//rules/reduceStone/4.tmx
