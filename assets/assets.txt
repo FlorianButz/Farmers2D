@@ -19,6 +19,10 @@ tiledMaps/map2/Tileset.tsx
 tiledMaps/map2/TilesetV1.png
 tiledMaps/map2/map2.tmx
 tiledMaps/map2/rules.txt
+tiledMaps/map2/rules/reduceStone/1.tmx
+tiledMaps/map2/rules/reduceStone/2.tmx
+tiledMaps/map2/rules/reduceStone/3.tmx
+tiledMaps/map2/rules/reduceStone/4.tmx
 tiledMaps/map2/rules/reset/1.tmx
 tiledMaps/map2/rules/reset/2.tmx
 tiledMaps/map2/rules/reset/3.tmx

@@ -3,7 +3,12 @@
 //rules/reset/3.tmx
 //rules/reset/4.tmx
 
-rules/rule1.tmx
-rules/rule2.tmx
-rules/rule3.tmx
-rules/rule4.tmx
+//rules/rule1.tmx
+//rules/rule2.tmx
+//rules/rule4.tmx
+//rules/rule3.tmx
+
+rules/reduceStone/1.tmx
+rules/reduceStone/2.tmx
+rules/reduceStone/3.tmx
+rules/reduceStone/4.tmx
