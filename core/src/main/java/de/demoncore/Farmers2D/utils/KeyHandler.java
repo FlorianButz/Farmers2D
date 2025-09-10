@@ -73,7 +73,7 @@ public class KeyHandler extends InputAdapter {
         }
 
         if (keycode == Input.Keys.C) {
-            Game.instance.getScreen().replaceCurrentTile(118, 0);
+            Game.instance.getScreen().replaceCurrentTile(118, 4);
         }
 
         isAnyKeyPressed = pressedKeys.size() != 0;
