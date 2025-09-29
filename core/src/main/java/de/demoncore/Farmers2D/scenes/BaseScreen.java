@@ -63,6 +63,10 @@ public class BaseScreen implements Screen {
         layer.setCell((int) temp.x, (int) temp.y, cell);
     }
 
+    public void setFarmlandAtPlayerPos(){
+        map.setFarmland(Player.instance.pos);
+    }
+
     /**
      * Adds a GameObject to the screen without immediately attaching a visual representation.
      * @param g The GameObject to add.

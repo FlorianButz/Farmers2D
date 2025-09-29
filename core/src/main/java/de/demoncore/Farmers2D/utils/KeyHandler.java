@@ -72,8 +72,8 @@ public class KeyHandler extends InputAdapter {
             Game.instance.getScreen().addObject(Plant.getNewPlant(0, Player.instance.pos.cpy().add(new Vector2(50, 0))));
         }
 
-        if (keycode == Input.Keys.C) {
-            Game.instance.getScreen().replaceCurrentTile(118, 4);
+        if (keycode == Input.Keys.H) {
+            Game.instance.getScreen().setFarmlandAtPlayerPos();
         }
 
         isAnyKeyPressed = pressedKeys.size() != 0;

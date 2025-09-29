@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.11.2" name="Tileset" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="392" columns="28">
- <image source="TilesetV1.png" width="512" height="256"/>
+<tileset version="1.10" tiledversion="1.11.2" name="Tileset" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="784" columns="28">
+ <image source="TilesetV1.png" width="512" height="512"/>
  <wangsets>
   <wangset name="Erde" type="corner" tile="-1">
    <wangcolor name="" color="#ff0000" tile="-1" probability="1"/>
@@ -145,6 +145,20 @@
    <wangtile tileid="315" wangid="0,0,0,0,0,0,0,1"/>
    <wangtile tileid="316" wangid="0,1,0,0,0,1,0,0"/>
    <wangtile tileid="317" wangid="0,0,0,1,0,0,0,1"/>
+  </wangset>
+  <wangset name="Wand" type="corner" tile="-1">
+   <wangcolor name="" color="#ff0000" tile="-1" probability="1"/>
+   <wangtile tileid="336" wangid="0,0,0,1,0,0,0,0"/>
+   <wangtile tileid="337" wangid="0,0,0,1,0,1,0,0"/>
+   <wangtile tileid="338" wangid="0,0,0,0,0,1,0,0"/>
+   <wangtile tileid="364" wangid="0,1,0,1,0,0,0,0"/>
+   <wangtile tileid="365" wangid="0,1,0,1,0,1,0,1"/>
+   <wangtile tileid="366" wangid="0,0,0,0,0,1,0,1"/>
+   <wangtile tileid="392" wangid="0,1,0,0,0,0,0,0"/>
+   <wangtile tileid="393" wangid="0,1,0,0,0,0,0,1"/>
+   <wangtile tileid="394" wangid="0,0,0,0,0,0,0,1"/>
+   <wangtile tileid="395" wangid="0,1,0,0,0,1,0,0"/>
+   <wangtile tileid="396" wangid="0,0,0,1,0,0,0,1"/>
   </wangset>
  </wangsets>
 </tileset>

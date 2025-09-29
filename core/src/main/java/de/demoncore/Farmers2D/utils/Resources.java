@@ -36,6 +36,7 @@ public class Resources {
     public static ArrayList<TileMap> maps = new ArrayList<>();
 
     public static BitmapFont pixelFont;
+    public static TiledMapTileSet farmland;
 
     public Resources(){
         instance = this;
@@ -58,12 +59,15 @@ public class Resources {
 
         //maps.add(new TileMap("tiledMaps/map1/test1.tmx", 2.5f));
         maps.add(new TileMap("tiledMaps/map1/test1.tmx", 1f, 5, 3));
-        maps.add(new TileMap("tiledMaps/map2/map2.tmx", 1f, 5, 5));
+        maps.add(new TileMap("tiledMaps/map2/map2.tmx", 1f, 5, 3));
+        maps.add(new TileMap("tiledMaps/map3/map3.tmx", 1f, 6, 4));
 
         for (TileMap map : maps){
             TiledMapTileSet tileSet = map.map.getTileSets().iterator().next();
             map.tilesetID = tileSet.getName();
         }
+
+        farmland = maps.get(2).map.getTileSets().getTileSet("farmland");
 
         Logger.logInfo("Resources loaded");
         initialized = true;

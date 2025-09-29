@@ -44,7 +44,7 @@ public class DefaultScreen extends BaseScreen {
     @Override
     public void initialize() {
         super.initialize();
-        map = Resources.maps.get(1);
+        map = Resources.maps.get(2);
         stage = new Stage();
         table = new Table();
         table.setFillParent(true);
